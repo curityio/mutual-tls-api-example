@@ -48,11 +48,11 @@ The Curity Identity Server presents a Mutual TLS endpoint and issues tokens that
 
 ### API Gateway
 
-The API Gateway terminates Mutual TLS for API requests, then passes the certificate public key to the API in an HTTP header.
+The API Gateway terminates Mutual TLS for API requests, then passes the certificate public key to the API.
 
 ### API
 
-The API verifies that the certificate public key matches the `cnf` claim in the JWT, then performs standard JWT validation.
+The API verifies that the certificate public key matches the `cnf` claim in the JWT, as part of its validation.
 
 ## More Information
 
