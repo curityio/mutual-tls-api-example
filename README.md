@@ -44,15 +44,15 @@ The client authenticates using a Client Certificate and a Mutual TLS connection 
 
 ### Authorization Server
 
-The Curity Identity Server runs behind a reverse proxy and issues tokens based on a trusted client certificate.
+The Curity Identity Server runs behind a reverse proxy and issues tokens when a trusted client certificate is presented.
 
 ### API Gateway
 
-This is used to verify Mutual TLS for API requests, then pass the cnf claim to the API in a custom header.
+The API Gateway terminates Mutual TLS for API requests, then passes the certificate public key to the API in an HTTP header.
 
 ### API
 
-The API receives and verifies the cnf claim in addition to performing its standard JWT validation.
+The API verifies that the certificate public key matches the cnf claim in the JWT, then performs standard JWT validation.
 
 ## More Information
 
