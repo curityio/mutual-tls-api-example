@@ -40,11 +40,11 @@ cd client
 
 ### Client
 
-The client authenticates using a Client Certificate and a Mutual TLS connection to the Curity Identity Server.
+The client authenticates using the Client Credentials Grant and a Client Certiticate.
 
 ### Authorization Server
 
-The Curity Identity Server runs behind a reverse proxy and issues tokens when a trusted client certificate is presented.
+The Curity Identity Server presents a Mutual TLS endpoint and issues tokens that assert the client identity.
 
 ### API Gateway
 
@@ -52,7 +52,7 @@ The API Gateway terminates Mutual TLS for API requests, then passes the certific
 
 ### API
 
-The API verifies that the certificate public key matches the cnf claim in the JWT, then performs standard JWT validation.
+The API verifies that the certificate public key matches the `cnf` claim in the JWT, then performs standard JWT validation.
 
 ## More Information
 
