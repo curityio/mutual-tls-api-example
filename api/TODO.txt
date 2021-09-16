@@ -1,1 +1,2 @@
-I will implement a simple API in Kotlin (JVM technology is typically used by banks)
+I will implement a simple API in Kotlin using the Jose library.
+Code will be simple and could be implemented in any technology.

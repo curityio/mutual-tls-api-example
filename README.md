@@ -11,14 +11,14 @@ The concepts are translated to a setup that can be easily run on a development c
 
 ## Prerequisites
 
-TODO: Certificate creation, hosts file setup, license file
+TODO: Certificate creation, hosts file setup, license file, Java 8 and maven
 
 ## Quick Start
 
 First build the code:
 
 ```bash
-cd code
+cd api
 ./build.sh
 ```
 
@@ -32,7 +32,7 @@ cd deployment
 Then authenticate via Mutual TLS and call the API over a Mutual TLS channel:
 
 ```bash
-cd code/client
+cd client
 ./test.sh
 ```
 
@@ -40,7 +40,7 @@ cd code/client
 
 ### Client
 
-The client authenticates using a Client Certificate over a Mutual TLS channel to the Curity Identity Server.
+The client authenticates using a Client Certificate and a Mutual TLS connection to the Curity Identity Server.
 
 ### Authorization Server
 
@@ -56,5 +56,5 @@ The API receives and verifies the cnf claim in addition to performing its standa
 
 ## More Information
 
-See the [Financial Grade API Code Example](https://curity.io/resources/learn/financial-grade-api/) article for further technical details on the setup.\
+See the [Financial Grade API Code Example](https://curity.io/resources/learn/financial-grade-api/) article for a more complete walkthrough.\
 Please visit [curity.io](https://curity.io/) for more information about the Curity Identity Server.
