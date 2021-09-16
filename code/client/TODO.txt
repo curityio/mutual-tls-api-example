@@ -1,1 +1,0 @@
-I will implement a simple client in Kotlin (JVM technology is typically used by banks)

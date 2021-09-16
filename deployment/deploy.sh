@@ -7,7 +7,7 @@
 #
 # This just prevents accidental checkins of license files by Curity developers
 #
-cp ./hooks/pre-commit ./.git/hooks
+cp ../hooks/pre-commit ../.git/hooks
 
 #
 # Spin up Docker components

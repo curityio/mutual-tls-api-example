@@ -1,2 +1,7 @@
 .DS_Store
 deployment/idsvr/license.json
+certs
+!certs/createCerts.sh
+!certs/client.ext
+!certs/server.ext
+.tmp
