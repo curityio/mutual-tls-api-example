@@ -56,5 +56,5 @@ The API receives and verifies the cnf claim in addition to performing its standa
 
 ## More Information
 
-See the [Financial Grade API Code Example]() article for further technical details on the setup.\
+See the [Financial Grade API Code Example](https://curity.io/resources/learn/financial-grade-api/) article for further technical details on the setup.\
 Please visit [curity.io](https://curity.io/) for more information about the Curity Identity Server.
