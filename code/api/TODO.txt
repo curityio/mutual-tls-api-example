@@ -1,2 +1,1 @@
-I will implement a small API in Kotlin, using the Jose library.
-Kotlin fits nicely with technologies used by banks.
+I will implement a simple API in Kotlin (JVM technology is typically used by banks)
