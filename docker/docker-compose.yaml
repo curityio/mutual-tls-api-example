@@ -1,0 +1,59 @@
+version: '3.8'
+services:
+
+  #
+  # The API Gateway runs over HTTPS so that it can deal with Mutual TLS when required:
+  # - For authentication requests, Mutual TLS is terminated at the Identity Server
+  # - For API requests, Mutual TLS is terminated at the gateway, for convenience
+  #
+  api-gateway:
+    image: kong:2.5.0-alpine
+    hostname: apigateway.example.internal
+    ports:
+      - 443:3000
+    volumes:
+      - ./api-gateway/kong.yml:/usr/local/kong/declarative/kong.yml
+      - ../.deploy/kong-phantom-token-plugin/plugin:/usr/local/share/lua/5.1/kong/plugins/phantom-token
+      - ../certs/root.pem:/usr/local/share/certs/root.pem
+      - ../certs/example.tls.pem:/usr/local/share/certs/example.tls.pem
+      - ../certs/example.tls.key:/usr/local/share/certs/example.tls.key
+    environment:
+    environment:
+      KONG_DATABASE: 'off'
+      KONG_DECLARATIVE_CONFIG: '/usr/local/kong/declarative/kong.yml'
+      KONG_PROXY_LISTEN: '0.0.0.0:3000 ssl'
+      KONG_SSL_CERT: '/usr/local/share/certs/example.tls.pem'
+      KONG_SSL_CERT_KEY: '/usr/local/share/certs/example.tls.key'
+      KONG_LUA_SSL_TRUSTED_CERTIFICATE: '/usr/local/share/certs/root.pem'
+      KONG_LOG_LEVEL: 'info'
+      KONG_LOG_LEVEL: 'info'
+      KONG_PLUGINS: 'bundled,phantom-token'
+
+  #
+  # The Identity Server runs over HTTPS inside the cluster
+  # It is accessed externally at https://login.example.com
+  #
+  identity-server:
+    image: curity.azurecr.io/curity/idsvr:6.4.2
+    hostname: login.example.com
+    ports:
+      - 6749:6749
+      - 8443:8443
+    volumes:
+     - ./idsvr/license.json:/opt/idsvr/etc/init/license/license.json
+     - ./idsvr/config-backup.xml:/opt/idsvr/etc/init/config.xml
+    environment:
+      PASSWORD: 'Password1'
+
+  #
+  # The demo API runs over HTTP and validates JWTs that include a client certificate public key
+  # It is accessed externally at https://api.example.com
+  #
+  api:
+    image: mutual-tls-api:1.0.0
+    hostname: api.example.internal
+    volumes:
+      - ../certs/root.pem:/usr/local/share/certs/root.pem
+      - ../api/config.json:/usr/local/api/config.json
+    environment:
+      NODE_EXTRA_CA_CERTS: '/usr/local/share/certs/root.pem'

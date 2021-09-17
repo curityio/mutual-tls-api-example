@@ -1,0 +1,31 @@
+_format_version: '2.1'
+_transform: true
+
+services:
+
+#
+# The Curity Identity Server is called API is called externally at https://login.example.com
+#
+- name: identity-server
+  url: https://login.example.com:8443/oauth
+  routes:
+  - name: example-api-route
+    paths:
+    - /oauth
+
+#
+# The API is called by sending a sender constrained access token to https://api.example.com/api/transactions
+#
+- name: example-api
+  url: http://api.example.internal:3000/api
+  routes:
+  - name: example-api-route
+    paths:
+    - /api
+  plugins:
+  - name: phantom-token
+    config:
+      introspection_endpoint: https://login.example.com:8443/oauth/v2/oauth-introspect
+      client_id: introspect-client
+      client_secret: Password1
+      token_cache_seconds: 900

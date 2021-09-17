@@ -5,7 +5,8 @@
     "main": "server.ts",
     "scripts": {
         "build": "rimraf dist && tsc",
-        "start": "npm run build && node dist/server.js"
+        "startApi": "node dist/server.js",
+        "start": "npm run build && npm run startApi"
     },
     "author": "Curity AB",
     "license": "Apache-2.0",

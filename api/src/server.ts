@@ -9,12 +9,12 @@ const app = express();
 
 const authorizer = new Authorizer(configuration);
 app.set('etag', false);
-app.use('/*', authorizer.validateJWT);
+app.use('/api/*', authorizer.validateJWT);
 
 /*
  * A simple business endpoint to simulate creating a transaction
  */
-app.post('/transactions', (request: express.Request, response: express.Response) => {
+app.post('/api/transactions', (request: express.Request, response: express.Response) => {
     
     const data = {message: 'Success response from the Example API'};
     response.setHeader('content-type', 'application/json');

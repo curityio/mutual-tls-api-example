@@ -5,18 +5,17 @@
 #
 
 IDENTITY_SERVER_BASE_URL=https://login.example.com:8443/oauth/v2
-API_BASE_URL=http://api.example.com:8000
+API_BASE_URL=https://api.example.com/api
 CLIENT_ID=merchant-client
 CLIENT_SECRET=Password1
-INTROSPECT_CLIENT_ID=introspect-client
-INTROSPECT_CLIENT_SECRET=Password1
-RESPONSE_FILE=../.tmp/response.txt
+RESPONSE_FILE=../.test/response.txt
+
+mkdir -p ../.test
 
 #
 # Act as the client to get an opaque access token using Mutual TLS
 #
-echo "Client is authenticating via Mutual TLS ..."
-mkdir -p ../.tmp
+echo "Client is authenticating with the Identity Server via Mutual TLS ..."
 HTTP_STATUS=$(curl -s -X POST "$IDENTITY_SERVER_BASE_URL/oauth-token" \
     --cert ../certs/example.client.pem \
     --key ../certs/example.client.key \
@@ -35,28 +34,11 @@ OPAQUE_ACCESS_TOKEN=$(jq -r .access_token <<< "$JSON")
 echo "Client successfully authenticated and received access token: $OPAQUE_ACCESS_TOKEN"
 
 #
-# Act as the gateway by introspecting the JWT access token
-#
-echo "API gateway is introspecting the access token received over a Mutual TLS channel ..."
-HTTP_STATUS=$(curl -s -X POST "$IDENTITY_SERVER_BASE_URL/oauth-introspect" \
-    -u "$INTROSPECT_CLIENT_ID:$INTROSPECT_CLIENT_SECRET" \
-    -H "Accept: application/jwt" \
-    -H "Content-Type: application/x-www-form-urlencoded" \
-    -d "token=$OPAQUE_ACCESS_TOKEN" \
-    -o $RESPONSE_FILE -w '%{http_code}')
-if [ "$HTTP_STATUS" != '200' ]; then
-  echo "*** API gateway experienced a problem introspecting the opaque access token"
-  exit
-fi
-JWT_ACCESS_TOKEN=$(tail -n 1 $RESPONSE_FILE)
-echo "API gateway successfully retrieved JWT access token"
-
-#
 # Act as the client sending the JWT to the API
 #
-echo "Client is calling the example API over Mutual TLS with a JWT credential ..."
-HTTP_STATUS=$(curl -s -X POST "$API_BASE_URL/data" \
-    -H "Authorization: Bearer $JWT_ACCESS_TOKEN" \
+echo "Client is calling the example API over Mutual TLS ..."
+HTTP_STATUS=$(curl -s -X POST "$API_BASE_URL/transactions" \
+    -H "Authorization: Bearer $OPAQUE_ACCESS_TOKEN" \
     -H "x-example-client-public-key: abc123" \
     -H "Content-Type: application/json" \
     -o $RESPONSE_FILE -w '%{http_code}')
@@ -64,4 +46,4 @@ if [ "$HTTP_STATUS" != '200' ]; then
   echo "*** Client experienced a problem calling the example API: $HTTP_STATUS"
   exit
 fi
-echo "Yay - client call worked ..."
+echo "Client successfully called the API"

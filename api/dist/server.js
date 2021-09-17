@@ -15,7 +15,7 @@ app.use('/*', authorizer.validateJWT);
 /*
  * A simple business endpoint to simulate creating a transaction
  */
-app.post('/transactions', (request, response) => {
+app.post('/api/transactions', (request, response) => {
     const data = { message: 'Success response from the Example API' };
     response.setHeader('content-type', 'application/json');
     response.status(200).send(JSON.stringify(data, null, 2));
