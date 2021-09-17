@@ -82,7 +82,13 @@ Access tokens include a `cnf` claim containing the SHA256 certificate thumbprint
 
 ### API
 
-APIs simply need to verify that JWTs containing a `cnf` claim match a custom header provided by the gateway. 
+APIs simply need to verify the client certificate thumbprint in the JWT matches that of the calling client:
+
+```json
+cnf: {
+"x5t#S256": "aEHDMMqTn73h-ybp-30KNG6aYeWCGjVgKO7WIBgB85Y"
+}
+```
 
 ## More Information
 
