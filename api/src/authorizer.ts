@@ -90,7 +90,7 @@ export class Authorizer {
      */
     private verifyClientPublicKey(receivedPublicKey: string, jwtPayload: JWTPayload): void {
 
-        JSON.stringify(jwtPayload['cnf'], null, 2)
+        console.log(JSON.stringify(jwtPayload['cnf'], null, 2))
 
         const expectedThumbprint = (jwtPayload['cnf'] as any)?.['x5t#S256'];
         if (expectedThumbprint !== receivedPublicKey) {
