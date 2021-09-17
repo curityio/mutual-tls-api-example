@@ -85,7 +85,8 @@ Access tokens include a `cnf` claim containing the SHA256 certificate thumbprint
 APIs simply need to verify the client certificate thumbprint in the JWT matches that of the calling client:
 
 ```json
-cnf: {
+cnf:
+{
 "x5t#S256": "aEHDMMqTn73h-ybp-30KNG6aYeWCGjVgKO7WIBgB85Y"
 }
 ```

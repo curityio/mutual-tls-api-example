@@ -90,8 +90,6 @@ export class Authorizer {
      */
     private verifyClientPublicKey(receivedPublicKey: string, jwtPayload: JWTPayload): void {
 
-        console.log(JSON.stringify(jwtPayload['cnf'], null, 2))
-
         const expectedThumbprint = (jwtPayload['cnf'] as any)?.['x5t#S256'];
         if (expectedThumbprint !== receivedPublicKey) {
             throw new Error('The API request contained an invalid client certificate public key');
