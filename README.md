@@ -1,17 +1,17 @@
-# Financial Grade API Code Example
+# Mutual TLS Secured API Code Example
 
-A Mutual TLS code example to demonstrate use of sender constrained access tokens
+A Mutual TLS code example to demonstrate the setup and the use of sender constrained access tokens.
 
-## Example Business Scenario
+## Business Scenarios
 
-The example represents an Open Banking scenario that would use eIDAS certificates for mutual trust.\
-The concepts are translated to a setup that can be easily run on a development computer.
+This type of API is commonly used between business partners, and this can include Open Banking setups:
 
 ![Sequence](doc/sequence.png)
 
 ## Prerequisites
 
-TODO: Certificate creation, hosts file setup, license file, Java 8 and maven
+Some prerequisite setup is needed, including running a script to create some self signed certificates for testing.\
+The [Financial Grade API Code Example](https://curity.io/resources/learn/financial-grade-api/) article explains these steps and provides a complete walkthrough.
 
 ## Quick Start
 
@@ -36,15 +36,17 @@ cd client
 ./test.sh
 ```
 
-## Components and Responsibilities
+## Security Workflow
+
+The code example enables the below steps to be easily run on a development computer:
 
 ### Client
 
-The client authenticates using the Client Credentials Grant and a Client Certiticate.
+The client authenticates using the OAuth Client Credentials Grant with a Client Certiticate credential.
 
 ### Authorization Server
 
-The Curity Identity Server presents a Mutual TLS endpoint and issues tokens that assert the client identity.
+The Curity Identity Server presents a Mutual TLS endpoint and issues tokens that include the client's public key.
 
 ### API Gateway
 
@@ -52,9 +54,8 @@ The API Gateway terminates Mutual TLS for API requests, then passes the certific
 
 ### API
 
-The API verifies that the certificate public key matches the `cnf` claim in the JWT, as part of its validation.
+The API verifies that the certificate public key received matches the `cnf` claim in the JWT.
 
 ## More Information
 
-See the [Financial Grade API Code Example](https://curity.io/resources/learn/financial-grade-api/) article for a more complete walkthrough.\
 Please visit [curity.io](https://curity.io/) for more information about the Curity Identity Server.

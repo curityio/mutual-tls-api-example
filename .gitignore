@@ -4,4 +4,5 @@ certs
 !certs/createCerts.sh
 !certs/client.ext
 !certs/server.ext
+node_modules
 .tmp

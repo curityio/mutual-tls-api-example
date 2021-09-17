@@ -1,0 +1,11 @@
+1. Build a simple API in NodeJS and call it from the client over http://localhost:3000 via a simple POST
+   API to write the cnf details to debug output
+
+2. Get the API call working via the gateway without Mutual TLS
+
+3. Get the gateway to accept client certificates and terminate Mutual TLS on behalf of the API
+
+4. Google getting LUA to read the client cert public key
+   Pass it through in a header x-example-client-public-key
+
+5. Read up on Curity articles

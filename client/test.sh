@@ -5,6 +5,7 @@
 #
 
 IDENTITY_SERVER_BASE_URL=https://login.example.com:8443/oauth/v2
+API_BASE_URL=http://api.example.com:8000
 CLIENT_ID=merchant-client
 CLIENT_SECRET=Password1
 INTROSPECT_CLIENT_ID=introspect-client
@@ -48,24 +49,19 @@ if [ "$HTTP_STATUS" != '200' ]; then
   exit
 fi
 JWT_ACCESS_TOKEN=$(tail -n 1 $RESPONSE_FILE)
-echo "API gateway successfully retrieved JWT access token: $JWT_ACCESS_TOKEN"
+echo "API gateway successfully retrieved JWT access token"
 
 #
-# Act as the API receiving a JWT
+# Act as the client sending the JWT to the API
 #
-JWT_PAYLOAD=$(jq -R 'split(".") | .[1] | @base64d | fromjson' <<< "$JWT_ACCESS_TOKEN")
-echo "API received JWT with payload ..."
-echo $JWT_PAYLOAD | jq
-
-#
-# Act as the API by receiving a JWT
-#
-echo "API received CNF claim to identify the client certificate ..."
-CNF_CLAIM=$(jq -r .cnf <<< "$JWT_PAYLOAD")
-echo $CNF_CLAIM | jq
-
-#
-# OpenSSL debugging commands
-#
-#openssl s_client -showcerts -connect login.example.com:8443
-#openssl s_client -CAfile ../../certs/root.pem -showcerts -connect login.example.com:8443
+echo "Client is calling the example API over Mutual TLS with a JWT credential ..."
+HTTP_STATUS=$(curl -s -X POST "$API_BASE_URL/data" \
+    -H "Authorization: Bearer $JWT_ACCESS_TOKEN" \
+    -H "x-example-client-public-key: abc123" \
+    -H "Content-Type: application/json" \
+    -o $RESPONSE_FILE -w '%{http_code}')
+if [ "$HTTP_STATUS" != '200' ]; then
+  echo "*** Client experienced a problem calling the example API: $HTTP_STATUS"
+  exit
+fi
+echo "Yay - client call worked ..."

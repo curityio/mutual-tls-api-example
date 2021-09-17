@@ -1,0 +1,7 @@
+{
+    "port": 8000,
+    "jwksUrl": "https://login.example.com:8443/oauth/v2/oauth-anonymous/jwks",
+    "algorithm": "RS256",
+    "issuer": "https://login.example.com:8443/oauth/v2/oauth-anonymous",
+    "audience": "api.example.com"
+}
