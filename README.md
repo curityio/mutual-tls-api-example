@@ -82,7 +82,7 @@ Access tokens include a `cnf` claim containing the SHA256 certificate thumbprint
 
 ### API
 
-APIs simply need to verify the client certificate thumbprint in the JWT matches that of the calling client:
+The API verifies that the thumbprint in the JWT's `cnf` claim matches that of the caller's client certificate:
 
 ```json
 cnf:
