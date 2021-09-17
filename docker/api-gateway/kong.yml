@@ -7,21 +7,25 @@ services:
 # The Curity Identity Server is called API is called externally at https://login.example.com
 #
 - name: identity-server
-  url: https://login.example.com:8443/oauth
+  url: https://login.example.com:8443
   routes:
-  - name: example-api-route
+  - name: identity-server
+    hosts:
+    - login.example.com
     paths:
-    - /oauth
+    - /
 
 #
 # The API is called by sending a sender constrained access token to https://api.example.com/api/transactions
 #
 - name: example-api
-  url: http://api.example.internal:3000/api
+  url: http://api.example.internal:3000
   routes:
-  - name: example-api-route
+  - name: example-api
+    hosts:
+    - api.example.com
     paths:
-    - /api
+    - /
   plugins:
   - name: phantom-token
     config:

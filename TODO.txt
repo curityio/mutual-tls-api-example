@@ -1,9 +1,6 @@
-1. Get the API call working via the gateway without Mutual TLS
-   Docker container
-   API to call out to identity server JWKS endpoint
-   NODE_EXTRA_CA_CERTS
+1. Get the gateway to terminate TLS for API requests, but to accept the client certificate
 
-2. Get the gateway to accept client certificates and terminate Mutual TLS on behalf of the API
+2. Get the gateway to pass OAuth requests straight through
 
 3. Google getting LUA to read the client cert public key
    Pass it through in a header x-example-client-public-key
