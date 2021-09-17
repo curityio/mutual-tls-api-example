@@ -40,21 +40,47 @@ cd client
 
 The code example enables the below steps to be easily run on a development computer:
 
-### Client
+### Client Authentication
 
-The client authenticates using the OAuth Client Credentials Grant with a Client Certiticate credential.
+The client authenticates using the OAuth Client Credentials Grant with a Client Certiticate credential:
 
-### Authorization Server
+```bash
+curl -s -X POST "https://login.example/com/oauth-token" \
+    --cert ./certs/example.client.pem \
+    --key ./certs/example.client.key \
+    --cacert ./certs/root.pem \
+    -H "Content-Type: application/x-www-form-urlencoded" \
+    -d "client_id=partner-client" \
+    -d "grant_type=client_credentials" \
+    -d "scope=transactions
+```
 
-The Curity Identity Server presents a Mutual TLS endpoint and issues tokens that include the client's public key.
+### Client API Requests
+
+The client then receives an opaque access token and sends it to the API, using Mutual TLS and the token: 
+
+curl -s -X POST "https://api.example.com/api/transactions" \
+    --cert ../certs/example.client.pem \
+    --key ../certs/example.client.key \
+    --cacert ../certs/root.pem \
+    -H "Authorization: Bearer 3e138be5-e9ed-4895-9058-73a5ab649f66" \
+    -H "Content-Type: application/json"
 
 ### API Gateway
 
-The API Gateway terminates Mutual TLS for API requests, then passes the certificate public key to the API.
+The API Gateway deals with Mutual TLS requests differently for these types of request:
+
+- OAuth requests are sent straight through to the Identity Server, where Mutual TLS is terminated
+- API requests are terminated at the gateway, then the certificate public key is passed to the API
+
+### Curity Identity Server
+
+A dedicated port is provided for Mutual TLS connections, which avoids impacting other apps.\
+Access tokens include a `cnf` claim containing the SHA256 certificate thumbprint of the client's certificate.
 
 ### API
 
-The API verifies that the certificate public key received matches the `cnf` claim in the JWT.
+APIs simply need to verify that JWTs containing a `cnf` claim match a custom header provided by the gateway. 
 
 ## More Information
 

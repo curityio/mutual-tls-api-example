@@ -6,7 +6,7 @@
 
 IDENTITY_SERVER_BASE_URL=https://login.example.com:8443/oauth/v2
 API_BASE_URL=https://api.example.com/api
-CLIENT_ID=merchant-client
+CLIENT_ID=partner-client
 CLIENT_SECRET=Password1
 RESPONSE_FILE=../.test/response.txt
 
@@ -38,6 +38,9 @@ echo "Client successfully authenticated and received access token: $OPAQUE_ACCES
 #
 echo "Client is calling the example API over Mutual TLS ..."
 HTTP_STATUS=$(curl -s -X POST "$API_BASE_URL/transactions" \
+    --cert ../certs/example.client.pem \
+    --key ../certs/example.client.key \
+    --cacert ../certs/root.pem \
     -H "Authorization: Bearer $OPAQUE_ACCESS_TOKEN" \
     -H "x-example-client-public-key: abc123" \
     -H "Content-Type: application/json" \

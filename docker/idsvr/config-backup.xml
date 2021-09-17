@@ -320,8 +320,8 @@
                 </use-pairwise-subject-identifiers>
               </client>
               <client>
-                <id>merchant-client</id>
-                <client-name>merchant-client</client-name>
+                <id>partner-client</id>
+                <client-name>partner-client</client-name>
                 <mutual-tls>
                   <client-dn>CN=demo-merchant</client-dn>
                   <trusted-ca>Example_Self_Signed_Root_CA</trusted-ca>
@@ -332,7 +332,7 @@
                   <client-credentials/>
                 </capabilities>
                 <use-pairwise-subject-identifiers>
-                  <sector-identifier>merchant-client</sector-identifier>
+                  <sector-identifier>partner-client</sector-identifier>
                 </use-pairwise-subject-identifiers>
               </client>
             </config-backed>
