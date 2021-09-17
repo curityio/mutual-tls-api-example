@@ -1,9 +1,9 @@
 .DS_Store
 docker/idsvr/license.json
-certs
-!certs/createCerts.sh
-!certs/client.ext
-!certs/server.ext
+/certs
+!/certs/createCerts.sh
+!/certs/client.ext
+!/certs/server.ext
 node_modules
 .deploy
 .test
