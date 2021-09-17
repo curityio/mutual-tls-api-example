@@ -2,7 +2,7 @@
 
 A Mutual TLS code example to demonstrate the setup and the use of sender constrained access tokens.
 
-## Business Scenarios
+## B2B Scenarios
 
 This type of API is commonly used between business partners, and this can include Open Banking setups:
 
@@ -59,12 +59,14 @@ curl -s -X POST "https://login.example/com/oauth-token" \
 
 The client then receives an opaque access token and sends it to the API, using Mutual TLS and the token: 
 
+```bash
 curl -s -X POST "https://api.example.com/api/transactions" \
     --cert ../certs/example.client.pem \
     --key ../certs/example.client.key \
     --cacert ../certs/root.pem \
     -H "Authorization: Bearer 3e138be5-e9ed-4895-9058-73a5ab649f66" \
     -H "Content-Type: application/json"
+```
 
 ### API Gateway
 
