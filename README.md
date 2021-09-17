@@ -11,7 +11,7 @@ This type of API is commonly used between business partners, and this can includ
 ## Prerequisites
 
 Some prerequisite setup is needed, including running a script to create some self signed certificates for testing.\
-The [Financial Grade API Code Example](https://curity.io/resources/learn/financial-grade-api/) article explains these steps and provides a complete walkthrough.
+The [Mutual TLS API Code Example Article](https://curity.io/resources/learn/mutual-tls-api/) explains these steps and provides a complete walkthrough.
 
 ## Quick Start
 

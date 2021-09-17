@@ -1,8 +1,11 @@
-1. Get the gateway to terminate TLS for API requests, but to accept the client certificate
+1. TLS passthrough seems difficult at a routing infrastructure level, so consider Mutual TLS by Proxy instead
+   - Custom Header with basic credential must be passed to Curity
 
-2. Get the gateway to pass OAuth requests straight through
+2. Understand how ssl_client_verify works in the reverse proxy
 
 3. Google getting LUA to read the client cert public key
    Pass it through in a header x-example-client-public-key
 
 4. Finish reading Curity articles
+
+5. Redo certs with demo-partner rather than demo-merchant

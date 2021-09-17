@@ -11,7 +11,7 @@ const configuration = JSON.parse(buffer.toString());
 const app = (0, express_1.default)();
 const authorizer = new authorizer_1.Authorizer(configuration);
 app.set('etag', false);
-app.use('/*', authorizer.validateJWT);
+app.use('/api/*', authorizer.validateJWT);
 /*
  * A simple business endpoint to simulate creating a transaction
  */
