@@ -13,20 +13,9 @@ mkdir -p .deploy
 cp hooks/pre-commit .git/hooks
 
 #
-# Download the phantom token plugin
-#
-cd .deploy
-rm -rf kong-phantom-token-plugin
-git clone https://github.com/curityio/kong-phantom-token-plugin
-if [ $? -ne 0 ]; then
-  echo "Problem encountered downloading the phantom token plugin"
-  exit 1
-fi
-
-#
 # Spin up all Docker components
 #
-cd ../docker
+cd docker
 docker compose up --force-recreate
 if [ $? -ne 0 ]; then
   echo "Problem encountered running Docker components"

@@ -1,11 +1,19 @@
-1. TLS passthrough seems difficult at a routing infrastructure level, so consider Mutual TLS by Proxy instead
-   - Custom Header with basic credential must be passed to Curity
+MAIN
+----
+1. Get end to end working with different external ports of 443 and 444
+   Use ssl_client_verify in proxy
 
-2. Understand how ssl_client_verify works in the reverse proxy
+2. Get API to receive header and output to console, then verify it
 
-3. Google getting LUA to read the client cert public key
-   Pass it through in a header x-example-client-public-key
+3. Get API JWT validation working
+   Can I use the Curity phantom token plugin with OpenResty?
+   If not then write a LUA one
+   Copy in plugin via docker compose
 
-4. Finish reading Curity articles
+4. Try to use a single port 443:
+   https://stackoverflow.com/questions/34741571/nginx-tcp-forwarding-based-on-hostname/40135151#40135151
 
-5. Redo certs with demo-partner rather than demo-merchant
+5. Automate certs in config-backup.xml after running createCerts.sh script:
+   Curity_TLS_Cert
+   Curity_Self_Signed_Root_CA
+   demo-partner

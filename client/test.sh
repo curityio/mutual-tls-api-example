@@ -4,8 +4,8 @@
 # A simple test client to show the HTTP requests for getting and sending a token with Mutual TLS
 #
 
-IDENTITY_SERVER_BASE_URL=https://login.example.com:8443/oauth/v2
-API_BASE_URL=https://api.example.com/api
+IDENTITY_SERVER_BASE_URL=https://login.example.com/oauth/v2
+API_BASE_URL=https://api.example.com:444/api
 CLIENT_ID=partner-client
 CLIENT_SECRET=Password1
 RESPONSE_FILE=../.test/response.txt

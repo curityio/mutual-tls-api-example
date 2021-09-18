@@ -25,7 +25,7 @@ esac
 # Certificate parameters
 #
 ROOT_CERT_FILE_PREFIX='root'
-ROOT_CERT_DESCRIPTION='Example Self Signed Root CA'
+ROOT_CERT_DESCRIPTION='Curity Self Signed Root CA for Mutual TLS Testing'
 
 CLIENT_CERT_NAME='demo-merchant'
 CLIENT_CERT_FILE_PREFIX='example.client'
