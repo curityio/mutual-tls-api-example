@@ -14,9 +14,13 @@ services:
       - 444:3001
     volumes:
       - ./reverse-proxy/nginx.conf:/usr/local/openresty/nginx/conf/nginx.conf
-      - ../certs/root.pem:/etc/nginx/certs/root.pem
-      - ../certs/example.tls.pem:/etc/nginx/certs/example.tls.pem
-      - ../certs/example.tls.key:/etc/nginx/certs/example.tls.key
+      - ../certs/root.pem:/usr/local/openresty/certs/root.pem
+      - ../certs/example.tls.pem:/usr/local/openresty/certs/example.tls.pem
+      - ../certs/example.tls.key:/usr/local/openresty/certs/example.tls.key
+    environment:
+      INTROSPECTION_CLIENT_ID: introspect-client
+      INTROSPECTION_CLIENT_SECRET: Password1
+      INTROSPECTION_ENDPOINT: https://login.example.com:8443/oauth/v2/oauth-introspect
 
   #
   # The Identity Server runs over HTTPS inside the cluster

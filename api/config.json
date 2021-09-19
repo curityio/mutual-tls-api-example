@@ -2,6 +2,6 @@
     "port": 3000,
     "jwksUrl": "https://login.example.com:8443/oauth/v2/oauth-anonymous/jwks",
     "algorithm": "RS256",
-    "issuer": "https://login.example.com:8443/oauth/v2/oauth-anonymous",
+    "issuer": "https://login.example.com/oauth/v2/oauth-anonymous",
     "audience": "api.example.com"
 }

@@ -1,16 +1,14 @@
-LATER
------
-1. Get phantom token plugin working
-   Can I use the Curity one with OpenResty by doing a 'uname -a' to understand the Linux distribution?
-   If not then write a LUA one
-   Copy in plugin via docker compose
+1. Get a LUA phantom token plugin working
+   NGINX phantom token plugin requires a precise NGINX version not supported by OpenResty
 
-2. Try to use a single port 443:
-   https://stackoverflow.com/questions/34741571/nginx-tcp-forwarding-based-on-hostname/40135151#40135151
-
-3. Automate certs in config-backup.xml after running createCerts.sh script:
+2. Automate certs in config-backup.xml after running createCerts.sh script:
    Curity_TLS_Cert
    Curity_Self_Signed_Root_CA
    demo-partner
+   https://curity.io/resources/learn/auto-certificate-renewal/
 
-4. Do code example write up
+3. Try to use a single port 443:
+   https://stackoverflow.com/questions/38371840/ssl-pass-through-in-nginx-reverse-proxy
+   https://stackoverflow.com/questions/34741571/nginx-tcp-forwarding-based-on-hostname/40135151#40135151
+
+4. Do the code example write up

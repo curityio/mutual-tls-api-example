@@ -1,6 +1,10 @@
 "use strict";
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.Authorizer = void 0;
+const base64url_1 = __importDefault(require("base64url"));
 const remote_1 = require("jose/jwks/remote");
 const verify_1 = require("jose/jwt/verify");
 const node_forge_1 = require("node-forge");
@@ -72,6 +76,8 @@ class Authorizer {
     verifyClientPublicKey(receivedPublicKey, jwtPayload) {
         const expectedThumbprint = this.getCertificateThumbprintFromJwt(jwtPayload);
         const receivedThumbprint = this.publicKeyCertToThumbprint(receivedPublicKey);
+        console.log(expectedThumbprint);
+        console.log(receivedThumbprint);
         if (expectedThumbprint !== receivedThumbprint) {
             throw new Error('The API request contained an invalid client certificate public key');
         }
@@ -96,8 +102,7 @@ class Authorizer {
         const cert = node_forge_1.pki.certificateFromPem(publicKey);
         const derBytes = node_forge_1.asn1.toDer(node_forge_1.pki.certificateToAsn1(cert)).getBytes();
         const hexThumbprint = node_forge_1.md.sha256.create().update(derBytes).digest().toHex();
-        const base64 = Buffer.from(hexThumbprint, 'hex').toString('base64');
-        return base64.replace(/\+/g, '-').replace('/', '_').replace(/=+$/, '');
+        return base64url_1.default.encode(Buffer.from(hexThumbprint, 'hex'));
     }
     /*
      * Basic API error logging

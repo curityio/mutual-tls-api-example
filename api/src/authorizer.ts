@@ -1,3 +1,4 @@
+import base64url from 'base64url';
 import {NextFunction, Request, Response} from 'express';
 import {createRemoteJWKSet} from 'jose/jwks/remote';
 import {jwtVerify, JWTPayload} from 'jose/jwt/verify';
@@ -123,8 +124,7 @@ export class Authorizer {
         const cert = pki.certificateFromPem(publicKey);
         const derBytes = asn1.toDer(pki.certificateToAsn1(cert)).getBytes();
         const hexThumbprint = md.sha256.create().update(derBytes).digest().toHex();
-        const base64 = Buffer.from(hexThumbprint, 'hex').toString('base64');
-        return base64.replace(/\+/g, '-').replace('/', '_').replace(/=+$/, '');
+        return base64url.encode(Buffer.from(hexThumbprint, 'hex'));
     }
 
     /*

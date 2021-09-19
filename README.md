@@ -27,7 +27,7 @@ Then build the code:
 ./2-build.sh
 ```
 
-Then deploy the infrastructure, including Mutual TLS endpoints:
+Then deploy the Mutual TLS endpoints:
 
 ```bash
 ./3-deploy.sh
