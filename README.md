@@ -15,25 +15,28 @@ The [Mutual TLS API Code Example Article](https://curity.io/resources/learn/mutu
 
 ## Quick Start
 
-First build the code:
+First create certificates for testing:
 
 ```bash
-cd api
-./build.sh
+./1-create-certs.sh
+```
+
+Then build the code:
+
+```bash
+./2-build.sh
 ```
 
 Then deploy the infrastructure, including Mutual TLS endpoints:
 
 ```bash
-cd deployment
-./deploy.sh
+./3-deploy.sh
 ```
 
 Then authenticate via Mutual TLS and call the API over a Mutual TLS channel:
 
 ```bash
-cd client
-./test.sh
+./4-run-client.sh
 ```
 
 ## Security Workflow

@@ -1,6 +1,7 @@
 import {NextFunction, Request, Response} from 'express';
 import {createRemoteJWKSet} from 'jose/jwks/remote';
 import {jwtVerify, JWTPayload} from 'jose/jwt/verify';
+import {asn1, md, pki} from 'node-forge';
 import {Configuration} from './configuration';
 
 export class Authorizer {
@@ -52,7 +53,7 @@ export class Authorizer {
                 code: 'unauthorized',
                 message: 'Missing, invalid or expired access token',
             }
-            response.status(401).send(JSON.stringify(error, null, 2));
+            response.status(401).send(JSON.stringify(error));
         }
     }
 
@@ -77,9 +78,9 @@ export class Authorizer {
      */
     private getReceivedCertificatePublicKey(request: Request): string | null {
 
-        const publicKey = request.header('x-example-client-public-key');
-        if (publicKey) {
-            return publicKey;
+        const publicKeyHeader = request.header('x-example-client-public-key');
+        if (publicKeyHeader) {
+            return decodeURIComponent(publicKeyHeader)
         }
 
         return null;
@@ -90,10 +91,40 @@ export class Authorizer {
      */
     private verifyClientPublicKey(receivedPublicKey: string, jwtPayload: JWTPayload): void {
 
-        const expectedThumbprint = (jwtPayload['cnf'] as any)?.['x5t#S256'];
-        if (expectedThumbprint !== receivedPublicKey) {
+        const expectedThumbprint = this.getCertificateThumbprintFromJwt(jwtPayload);
+        const receivedThumbprint = this.publicKeyCertToThumbprint(receivedPublicKey);
+        if (expectedThumbprint !== receivedThumbprint) {
             throw new Error('The API request contained an invalid client certificate public key');
         }
+    }
+
+    /*
+     * Get the client certificate asserted by the Authorization Server
+     */
+    private getCertificateThumbprintFromJwt(jwtPayload: JWTPayload): string {
+
+        const cnf = jwtPayload['cnf'] as any;
+        if (cnf) {
+            const thumbprint = cnf['x5t#S256'];
+            if (thumbprint) {
+                return thumbprint;
+            }
+
+        }
+        
+        throw new Error('The JWT did not contain the expected cnf/x5t#S256 claim');
+    }
+
+    /*
+     * Convert a public key to a SHA256 thumbprint, which is base64 url-encoded
+     */
+    private publicKeyCertToThumbprint(publicKey: string): string {
+
+        const cert = pki.certificateFromPem(publicKey);
+        const derBytes = asn1.toDer(pki.certificateToAsn1(cert)).getBytes();
+        const hexThumbprint = md.sha256.create().update(derBytes).digest().toHex();
+        const base64 = Buffer.from(hexThumbprint, 'hex').toString('base64');
+        return base64.replace(/\+/g, '-').replace('/', '_').replace(/=+$/, '');
     }
 
     /*

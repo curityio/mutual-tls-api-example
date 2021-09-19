@@ -1,19 +1,16 @@
-MAIN
-----
-1. Get end to end working with different external ports of 443 and 444
-   Use ssl_client_verify in proxy
-
-2. Get API to receive header and output to console, then verify it
-
-3. Get API JWT validation working
-   Can I use the Curity phantom token plugin with OpenResty?
+LATER
+-----
+1. Get phantom token plugin working
+   Can I use the Curity one with OpenResty by doing a 'uname -a' to understand the Linux distribution?
    If not then write a LUA one
    Copy in plugin via docker compose
 
-4. Try to use a single port 443:
+2. Try to use a single port 443:
    https://stackoverflow.com/questions/34741571/nginx-tcp-forwarding-based-on-hostname/40135151#40135151
 
-5. Automate certs in config-backup.xml after running createCerts.sh script:
+3. Automate certs in config-backup.xml after running createCerts.sh script:
    Curity_TLS_Cert
    Curity_Self_Signed_Root_CA
    demo-partner
+
+4. Do code example write up

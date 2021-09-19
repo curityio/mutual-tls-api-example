@@ -20,14 +20,13 @@ services:
 
   #
   # The Identity Server runs over HTTPS inside the cluster
-  # It is accessed externally at https://login.example.com
+  # It is accessed externally at https://login.example.com over port 443
   #
   identity-server:
     image: curity.azurecr.io/curity/idsvr:6.4.2
     hostname: login.example.com
     ports:
       - 6749:6749
-      - 8443:8443
     volumes:
      - ./idsvr/license.json:/opt/idsvr/etc/init/license/license.json
      - ./idsvr/config-backup.xml:/opt/idsvr/etc/init/config.xml
@@ -36,7 +35,7 @@ services:
 
   #
   # The demo API runs over HTTP and validates JWTs that include a client certificate public key
-  # It is accessed externally at https://api.example.com
+  # It is accessed externally at https://api.example.com:444
   #
   api:
     image: mutual-tls-api:1.0.0

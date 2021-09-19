@@ -18,7 +18,7 @@ app.post('/api/transactions', (request: express.Request, response: express.Respo
     
     const data = {message: 'Success response from the Example API'};
     response.setHeader('content-type', 'application/json');
-    response.status(200).send(JSON.stringify(data, null, 2));
+    response.status(200).send(JSON.stringify(data));
 
     console.log(`Example API returned a success result at ${new Date().toISOString()}`);
 });
