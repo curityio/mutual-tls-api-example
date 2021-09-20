@@ -1,8 +1,19 @@
-1. Get a LUA phantom token plugin working
-   NGINX phantom token plugin requires a precise NGINX version not supported by OpenResty
+INFRA WORK
+----------
+1. Get port 8444 working for Mutual TLS
 
-2. Try to use a single port 443:
+2. Use a single external port 443:
    https://stackoverflow.com/questions/38371840/ssl-pass-through-in-nginx-reverse-proxy
    https://stackoverflow.com/questions/34741571/nginx-tcp-forwarding-based-on-hostname/40135151#40135151
 
-3. Do the code example write up
+DOC
+---
+1. Write the main part of the code example write up
+   Explain management aspects as a note
+
+REFINEMENTS
+-----------
+1. LUA phantom token plugin to complete and move to a separate repo
+   Also do a HOWTO - tomorrow - but post on the channel first
+
+2. More time on the above infra requirements if needed

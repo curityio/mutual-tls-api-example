@@ -7,7 +7,7 @@ services:
   # - For API requests, Mutual TLS is terminated at the gateway, for convenience
   #
   reverse-proxy:
-    image: openresty/openresty:1.19.3.1-8-bionic
+    image: custom_openresty:1.19.3.1-8-bionic
     hostname: reverseproxy.example.internal
     ports:
       - 443:3000
@@ -17,10 +17,6 @@ services:
       - ../certs/root.pem:/usr/local/openresty/certs/root.pem
       - ../certs/example.tls.pem:/usr/local/openresty/certs/example.tls.pem
       - ../certs/example.tls.key:/usr/local/openresty/certs/example.tls.key
-    environment:
-      INTROSPECTION_CLIENT_ID: introspect-client
-      INTROSPECTION_CLIENT_SECRET: Password1
-      INTROSPECTION_ENDPOINT: https://login.example.com:8443/oauth/v2/oauth-introspect
 
   #  
   # The Identity Server runs over HTTPS inside the cluster
