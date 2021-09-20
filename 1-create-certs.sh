@@ -4,6 +4,7 @@
 # A script to create development certificates for Mutual TLS testing
 ####################################################################
 
+cd certs
 set -e
 
 #
@@ -27,7 +28,7 @@ esac
 ROOT_CERT_FILE_PREFIX='root'
 ROOT_CERT_DESCRIPTION='Curity Self Signed Root CA for Mutual TLS Testing'
 
-CLIENT_CERT_NAME='demo-merchant'
+CLIENT_CERT_NAME='demo-partner'
 CLIENT_CERT_FILE_PREFIX='example.client'
 CLIENT_CERT_PASSWORD='Password1'
 

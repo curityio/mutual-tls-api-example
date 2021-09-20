@@ -76,8 +76,6 @@ class Authorizer {
     verifyClientPublicKey(receivedPublicKey, jwtPayload) {
         const expectedThumbprint = this.getCertificateThumbprintFromJwt(jwtPayload);
         const receivedThumbprint = this.publicKeyCertToThumbprint(receivedPublicKey);
-        console.log(expectedThumbprint);
-        console.log(receivedThumbprint);
         if (expectedThumbprint !== receivedThumbprint) {
             throw new Error('The API request contained an invalid client certificate public key');
         }

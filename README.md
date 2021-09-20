@@ -6,7 +6,7 @@ A Mutual TLS code example to demonstrate the setup and the use of sender constra
 
 This type of API is commonly used between business partners, and this can include Open Banking setups:
 
-![Sequence](doc/sequence.png)
+![Sequence](images/sequence.png)
 
 ## Prerequisites
 

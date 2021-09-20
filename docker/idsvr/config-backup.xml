@@ -19,7 +19,7 @@
         <service-role>
           <id>default</id>
           <protocol>https</protocol>
-          <ssl-server-keystore>Curity_TLS_Cert</ssl-server-keystore>
+          <ssl-server-keystore>Curity_Example_TLS_Cert</ssl-server-keystore>
           <enable-http-v2>true</enable-http-v2>
           <mutual-tls>
             <listening-port>8443</listening-port>
@@ -323,8 +323,8 @@
                 <id>partner-client</id>
                 <client-name>partner-client</client-name>
                 <mutual-tls>
-                  <client-dn>CN=demo-merchant</client-dn>
-                  <trusted-ca>Example_Self_Signed_Root_CA</trusted-ca>
+                  <client-dn>CN=demo-partner</client-dn>
+                  <trusted-ca>Curity_Self_Signed_Root_CA</trusted-ca>
                 </mutual-tls>
                 <audience>api.example.com</audience>
                 <scope>transactions</scope>
@@ -406,7 +406,7 @@
     <crypto>
       <ssl>
         <server-keystore>
-          <id>Curity_TLS_Cert</id>
+          <id>Curity_Example_TLS_Cert</id>
           <size>2048</size>
           <keystore>data:application/p12;aes,v:S.MW9Nb0VjOVJoTjZ4THVYNA==.JMw7_zRmkPyP_xgMXP-rPA==.dQ3VAT0MM4h7ttA8yqbYNHDOGnqTW0RM_E_MQ4HBKCU2ZXHfYcSOUEgycyZ-tHnkDzch8NObrFbGoIGiXQXqz2_f8nXX7c0o4ipwI6hSI-QYEshxY-_cPEqeZQaacSizK58CJHGThPsILvqLI5FwOLU8J_Cjc07oPytC---ih2FW5mX63epkt2tKPwgoClAY-IgSzHioMBl1xnkZMAsEcYy1Y13dCHo2K8ZdrRNjf2gcKZYWjRgjqITcy6bkl6AQcHbrwiF123hWNLakW3njWXC6ldb39KwHrYHGTGi3VDWDGpli--MDjQWtGmoO6GG9e2lXCP_vdmSSxpNbZuPaWGrrrIa1D8lRWRP5r2ccSQSSgt4QCYc12Ki8f7dNFM3CbPcF1RUytUpxy-6sEtt11iludhYqUj-oTDIAQKFqUYC1f8X2HG8Lcy6wyMq9qNxPmOTwyghR-iC1JUotdMoNlUXpuyhddhPkIhmTuITfbQcPZhbM7VjKyPDOEp8xEV_dGqksvxrP6fWpwGdLZXbslwMAHikaEKhImPstK7Xq-D0WwN7VLOUeI0f_hOrtHdnq04Vst6Nafl3t9J6xYm0q-f-fBrEczKg9NAl1B-_UeRPOOkaX3pSRhtW-l5sWs-e3ae-V-bR9e808nQ_thFw-DxddF3u_w6rJUTzZ2F18dM1YtZdObLROgNF1yP0pVk3a5HgQ8ffx9HrInx4_HT1W9NZvCU4aDXM1FRfXhXIIjdcoc2aPov7_Tn3lXAGNFOeD7MHiSMEGBfax2ATVMXwE0cTtI1GjDeHNxhgje7C9v9NbJKp7cqfikv58zYT7iuD83FCOCkTcDIohB58dbIFXVinSIibkagi-bsfnbQ26Ju5MAgdFHBJ_WNRehguF2BSpfvPXYoIViut1R7HSxrlQ8c_DuHFiYF6D0wBoi0A0ufPHA_5sHtPy5UqyjpceW9yoKZOzmahk0x2P3kTBoZf--6wjcKH_SGOq8V00lKv2aOdKLn97BJfoOY9Ed3PvIC7PSRkM5ngFmTBS-rixS0acjgzHwuDNn_mOHYhTxnf3NIN0thoiMTkMWoYgkPzVXawdM2z5U_OdSWSqcWyLchOdn2yZ8kVe9kRw23q478byJWEjDbwbwqsSdvysqVRSD0E4u102LmTHhbpHB-FZBjuveCW8TZAGwP6_6XoI05nr3K_X5iwME-J8BgArqloDvZuaRpjC2jVoXY5FhB8WqWIxSOcm5bEfjTHv9ZX2hWsFuPKDxA24KUfwcURxwfbAomfvVFfUU932wDuGMO2vAhGKuKIEnKm48bs2y8f6x3BotmFLhZivgTeTlQrDB9g5FF179GiB2O33iF89iZlto4INgfnZY3hS0rM3ZN2YbpkrgIhK48oE2d7NF7rdGeQBj3AaNcmlmVkuXSEZ4GyUbnLWP_ebb-uA1TXUEiqzX-ttz4q23iF-Mh_7E_k9rKKofWgCtmGzWzvFOmbuLxi5SyHnZq0fde5VKAynALer8-Wq_FR1trGCsLlvDxl7GwGbGoQzCo8564-jqz4gMmfVIdeUuRGSQw6SnheL0lOYxwBw6bqtkP1sllsO2OBAWVg20BzprI2bDWAczTOBamyaTOU44afSOpQN-OjCmr4-DbeDmnVgt9tElwSvmXkkgSV4WZ2mgT63IBbo5bJ6S0INzVZX7rDiXrsJ32FkBP-B7uQrm8zGs024ZHsguZCzExuwnIoJZ991aP5IigHBjqH6c_7tppjNwmSb81JdmrQKoW1umGC-0PdCfFIO4aTxocN0EnqBcm-pG-M_ye804Pmbj0dahryBd83cuXLxoTLDAT_FzQeokTh6jgWyRQLcM4jMNdBLbKhCFtzxewRvj00s-u0yP0zFbAKvpxm_anHrY3AgMDJzdhN-nLAsyK-YD2c3kYu9iQFogwFuKF3i94-LlOvuULahqk2VHk17SXGXr3tg-LEMw_49kLqF_CMJ7Ibjdy3S_6-dhKtIXI3-JB8TnJhZAHmNV6xxdJvES1FVvPaqXSfdBhLD8c5dWfCJFwOZ24AaiZBeHR7yaYKPQgsYz6WEg7sjY9zE8ZDyLAcBGDLHT_UshMnNtzW8w3FaH4l12BKRuZnjcel6VY1TN12-vmTuOhqnUT7hvO6RKycJ2RzlLejVp_p8LiPPmXzNnDi6Autep_iAi4UyOQxK1ZmsnfRyd5l3-xsbcJ5ggSh4c2hxPtGejfxzgOTI2NrPSx3q_wu7NNA5opK-eG25pYYHR3l39u5sq_EscunWwVzA4VRwjn2JjIqeTlOqutU7HgiVa5YB4LbveZYHjbFitGnXzLZy-IWHUS5Jkf81JZNfB0TttibSR3JDCF-F38NqmLshJ7k7__ZyyMCfMo-ZJSNXdAUBl6Ta9yBMCBicenJi_XxSSQIGcXXOBUGwNkBxE-WGGh39VQ0b_th5OyWs87EkuVkGZIB_Ct-O8b0efyKViQqE1V0f4J9RfBM6bqkJiTX-19XE8jb0zzUChs190yQj9nuWcPXyxvplodrs8plIQK_rNqlm_x5lKDd4I1MHCoXgFnyzU_i7LO-_HJjkvup3nSHz2ukaxzdUI0Gc2etBHJKBVbqox9oLb8BQTlPhipRG8sTQx5ItOeYdPnVGzC9Qd2tE-RQoTtb0URgPd1MD8ni8N2weZ0q0MJ7i_G726XZLZPtx7OiI6h9nFN_PDLU3csINjqciThIj_MymbYZ7A6iSwnaxgmcCk1qdmGTVWBuJJrA5T3x0120KsxDetLm9c-bwT2DS69zNsaG2zkN3k5skBkw9VaMzoWHWjeJ2MGz0MwoCm09F9PGB-naHBBI9aNRm0On2LmSKXR_xlbW8AzGbSWbXjzkEY3Ep0slD6Z92yd7dVEI6UtMwV7NUSZd3-XksvZKja9iMPAXRwTqjJkJhZD_VNmFHvsI0f6UeIglClkWitY3ztiO_Nq7f88NsXDb_VZmDqHKyaHiCmijy2DSuiLBJsIqmY6dEjEVf0fmrf99YOBB9YbaTIrgkTsiCol8nVe5zQ-j0f40K8HrZMEKAvJVMhRdV8zJmLAgaZouDeWLfve4SLnI_ov_8RlLyxB2hiQdA2zFfIkup7G4to737D8lSfj-JuNVXGMQQzL_meRG8hj_OBLTKuUjbPYHqQZIWXuEUWwzGwwH6S48zheKKglouCg7ozgUFc2-H6b61-uOddMIEDrWZbQFrM5UI01EHfQdMbT3Jw5GvS4Sp67xXD8tc9Op53FGzuQLFWVsFzBuc_4HwxNMXjMI0H5StKQDSP8cthI_djOuzNkTu4BjkG3I=.4anKMj8I0S785WpsWHECceANFl1tzpoqbQq3ZtzL69w=</keystore>
           <type>rsa</type>
@@ -417,17 +417,17 @@
         </server-keystore>
         <server-truststore>
           <server-certificate>
-            <id>Example_Self_Signed_Root_CA</id>
+            <id>Curity_Self_Signed_Root_CA</id>
             <size>2048</size>
-            <keystore>data:application/pem;aes,v:S.dDBHb1hNM0M2dWlIcDhhbA==.rDpoQEb9uTtbuVyYHhRB0A==.oDqFh__rm5X2Tk-Gmlgya7D5TM9YmUz5mYvRzHn_io0YhDGwC6iEzJd5pIvItN0tscEX4YhdhFWIStyixWfInyTGcSkakmZ0ihERbJepy80m0I4H9g0F73oSCCCgy9PnTNDOVNMwX2CYJc6TihkC7wonbnqNqAvA-JCPWRIS4p9yBLXvAbJnU4ioA_abtpuCXd29z-tn2fR34LkK84hUqr3BiGWjLom52vIRTeJLEcWFQGjLkVge2ATRScPEHuTplPLgEpYpH4ljUmO2PIzQQ8OeJvukAMaxcHwNELiUfGoghmwtsqsIctGL6dXpuADi9EmnphL6O8x0PUG2HPKkNe9v3I9BqKO2-7SNmkfoj02YoUzipYdWxCCYP8BvzcqwdwoWRCFCP1KbzzrvbtAzhSUkEsvIh0rGW7LDHFddTaRmRuZc2fn44-7jlOeOo1RFMkQCnxxxbQb4JbMcjNcXDriEvulS6zL8VxvIGCPNFhdioMhp3uh3lT-aZER7tG9rqN4j_CanSYJxeXiLSZD9UKcocHqUym9Ph72rn9rOe2JCCQLLawYQdcrXLkDzdrJo1ZyRGONQsUCr50LldUw0kiBW6TwSvSo9QB-PMAVXTHpe7S2sTlxrnO0JHuJqrL3Dn_e62wBpvZrka19Rj0re_nTTDxW3jhO8nyD42ssi8zaSdrYXwmy8c3jfwNaHKkaEg-PR15nvrkan-Wc_q8_JRrpGCHHRLjlwKwh3GD1grlL5XiVlUjgwNjTmeSAM9h7klyrI5T-GNuvTiCdBWYk7atW2gtJ0G3dIxtG9yB6USlVaj8zWUBbvKRr2pQRuFwsDtDqfuXuBQ4ofckW-rHO5xK4EQmJZLxKCCZkgLM8m39QpFRRB3Gq_ntnXir_EnAsVuNnLASRWpVIqgFc9lyVEYem-Mf9gp5ki1JRTwqEJKF3akMPShN_wuchzZOtKbaLxUdCjhucZ5JunamnySaaDYMr_2j8CYqbIlALXvFcQGVra8VglxaWqeo0axm3wawf_KLx1PmIQyEZ8hT6vBzhEhz75OhwVk3nxsjqpN42YDs6IA1LnSxbcgFtSogFj1eylzcDe1_Bvn9y39mkpxS84vT0LVxrRxKgnfo7XyIfJzwSeaUvA1aLIXfDyS6jAC1xmUNpWy7IUdnzDRFhlnJA_jxZ8tT-hnvkbt405kvjE2PJrswY5-gvJOZrwmrZrJGvVTqRc2BtbeevHbE6NpvbGH9zj6jH0HneRklBbeWZg85TbgqpD9_OYaIE8c3sKAKHYl7KCytepxXXpPJ2PjRUuf79bFkmYE5__WOJu9cCUiLr0hEG9k6G5KlOAhSucamnQ84ib-PTDFWK7g_KVXzSsx-8ZkkUpbtHxA3yO7LsVWdhwOeoBdniSBc76om6f00pIkyWdaAV868sDVudkjCtvc8ccvqFpfgsKjv1uO3WMosJBTgWlLOKRrig0A-6XosGm0vnHWERVFO9tSsUXhFq08r9CZxmBaWZ95ae0T-TiO1nWtydRNXC0332Shr20puZApAuf6Umc6isYcLz8XI-WKhH9feZcygNJuHbisFHTrLowSKjUFf83SgqSuRuyWzetB4sLuO-55poj3wWy2xz1fabEjX4UnmnqWHQ1guBJ9TM=.vRPaBYwk6baA_wRF2c9B_8TWHYf29f3UA1bDPwgtk5A=</keystore>
+            <keystore>#{CURITY_EXAMPLE_ROOT_CA}</keystore>
             <type>rsa</type>
           </server-certificate>
         </server-truststore>
         <client-truststore>
           <client-certificate>
-            <id>Example_Self_Signed_Root_CA</id>
+            <id>Curity_Self_Signed_Root_CA</id>
             <size>2048</size>
-            <keystore>data:application/pem;aes,v:S.NjNCaTFEd0VrcGlyQ2p5RA==.r-qZCd7XDBggvsx5C8IqcQ==.F1RcjmrJQLtzidvXPfHkkgqnPUELjtt-hKshlFbfKCiQmTjGubxaa40y7iAa2sW4Chz-xAYjs3uGEs_sxI7MJ0ZUEktK2dXRdZSn3RCNch3BTdfjBqNllfqxRKffoHxA3e88rXytgQC8AeVtkbzOp0wBFAS_uLw7VUu0hwU-u3BTFYsYxc50yi76v7kaYet-0owRJmXzKM6k1C0emv1rIA6Eh6fN--pVyyn6US9bpmr4CjPstutXlyL28A2-ecPt5bpYOJ_HeAMJILMjDBD5mzIKsQLoJNi-kiz9z83eUlIf-M9j0jXXdEHo6ehlN8K-doW3Bt8tAMEkPpeH_eqBc3zn80t9gvhP_Ja9tNaTer0Qk7Gx0tI1esdHaPyRSzuNqCIty84gN03FJLhOCQQSbdPTj0kCawL33gTMB1402sB6PaYybLc9hH0BljAQUNpM577O0b3nfUhtK6O04Xxc2v6kOgOQksO8npAHCrwixTib4MzNslZYRWGEoBPTnnzSxlB1NoJRxTQuowDzZON5_HXDT9btoOmjvDCLDya24mFV_Phy-awE4lxs4XregfK6aTIg71J_WV3h8V3t01JwthvaLmFMBSVGdY_ay_xt34Y4xmdF5xBRBA9a6VFqadHTB3MbtBjEbwcTtT4IUNXA5dbVnWgB1U7xbxa8yTMX_WcuBw41fCsuuLosD0VZW9HiRclo-1mGJe0V3Fx1Qgd13C3WwHp_Dsj3bvdpvu3WAWGnV-R40nebsV_VqvbI7L-B-jtglDGI4ErX6RLMqAn6w5OpLPUBTJ_j09dCuLYpA2qdYl_dhpDFUpDseLbCLJGZL8natcptGBQRYW40pLT4XDJJd0Vb93L1_tAxz8kg5I0v199RvMI079ARFVoeBJDY57dNcHdywLjFtXt48qovyl0ZbPSqV6KnAijWynuyCKbF7eq6TSDY25NkXf6CMepEqdK-izafwywooJw6tgMWh-_yzYWdG2vP1IL6H-9rtXS9OQxDqJlkdoDMmbMGn9-SekJkC3ogLPvhTbcZXPzmodb_8lwrSmZtW-FZ2sgvDnQD82lHnPTkuzvVrkbzkKPU618sqg1FaiR7qQurKZK80gydr6EZ0p1IBl8H0JDwyZ4vKlcYWeSAqHuqpJTv825CkRzDnqjcfr2-He7nJ2nETpW6QZbw0YcCCKjRlPzL9iFgisguZ46DUGV9NdUUXplGBpDmgZhQ4djPGHL6eKZfqxfvLYEOGmug9lkGSqcXI-xOiHqqBuhgRDJ_rtELUZxt30Qj_K7d_qtG_2p_iL1dWLNeVG8loDB3L3sQR3UZnf5i9E0nTFif8geQM4p41aRwVKqiJrHEkfSYeDwELCTFYtqfswNEmVI3F3vUFjBD31xZwA2UXh98ueBWlAwD0MUgX2NsmBpK9MNPdcD-Hl181fHbLgHA4QrptIST2GSnYlqspXUrpZnhZ6Lgf85wZOdj2DU2CS0-CQ3G2yEcfZPHlwU0ISf2_QWveBaK0a-BCY0c7eVsUmw8tbNvs-CMx9kGT6j7U95O0kX1DtKl2eLpqcPcbGkQxgyfxYSZWFLkiDEdgb4PnwZRUTodx2fBXnz-X0vaSxI6qVxqQOMJmAzXsHVC_rWs8SMEVATvUR_ag5k=.XVb0s2qBZuOKD9QjalfTMbolnnZRP2Xn579ycpu5Z60=</keystore>
+            <keystore>#{CURITY_EXAMPLE_ROOT_CA}</keystore>
             <type>rsa</type>
           </client-certificate>
         </client-truststore>

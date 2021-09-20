@@ -22,7 +22,7 @@ services:
       INTROSPECTION_CLIENT_SECRET: Password1
       INTROSPECTION_ENDPOINT: https://login.example.com:8443/oauth/v2/oauth-introspect
 
-  #
+  #  
   # The Identity Server runs over HTTPS inside the cluster
   # It is accessed externally at https://login.example.com over port 443
   #
@@ -35,7 +35,8 @@ services:
      - ./idsvr/license.json:/opt/idsvr/etc/init/license/license.json
      - ./idsvr/config-backup.xml:/opt/idsvr/etc/init/config.xml
     environment:
-      PASSWORD: 'Password1'
+      PASSWORD: Password1
+      CURITY_EXAMPLE_ROOT_CA: "${CURITY_EXAMPLE_ROOT_CA}"
 
   #
   # The demo API runs over HTTP and validates JWTs that include a client certificate public key
