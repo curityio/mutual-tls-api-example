@@ -1,0 +1,47 @@
+version: '3.8'
+services:
+
+  #
+  # The reverse proxy runs over HTTPS so that it can deal with Mutual TLS when required:
+  # - For authentication requests, Mutual TLS is terminated at the Identity Server
+  # - For API requests, Mutual TLS is terminated at the gateway
+  #
+  reverse-proxy:
+    image: custom_openresty:1.19.3.1-8-bionic
+    hostname: reverseproxy.example.internal
+    ports:
+      - 443:3000
+    volumes:
+      - ./reverse-proxy/nginx.conf:/usr/local/openresty/nginx/conf/nginx.conf
+      - ../certs/root.pem:/usr/local/openresty/certs/root.pem
+      - ../certs/example.tls.pem:/usr/local/openresty/certs/example.tls.pem
+      - ../certs/example.tls.key:/usr/local/openresty/certs/example.tls.key
+
+  #  
+  # The Identity Server runs over HTTPS inside the cluster
+  # It is accessed externally at https://login.example.com over port 443
+  #
+  identity-server:
+    image: curity.azurecr.io/curity/idsvr:6.4.2
+    hostname: login.example.com
+    ports:
+      - 6749:6749
+    volumes:
+     - ./idsvr/license.json:/opt/idsvr/etc/init/license/license.json
+     - ./idsvr/config-backup.xml:/opt/idsvr/etc/init/config.xml
+    environment:
+      PASSWORD: Password1
+      CURITY_EXAMPLE_ROOT_CA: "${CURITY_EXAMPLE_ROOT_CA}"
+
+  #
+  # The demo API runs over HTTP and validates JWTs that include a client certificate public key
+  # It is accessed externally at https://api.example.com
+  #
+  api:
+    image: mutual-tls-api:1.0.0
+    hostname: api.example.internal
+    volumes:
+      - ../certs/root.pem:/usr/local/share/certs/root.pem
+      - ../api/config.json:/usr/local/api/config.json
+    environment:
+      NODE_EXTRA_CA_CERTS: '/usr/local/share/certs/root.pem'
