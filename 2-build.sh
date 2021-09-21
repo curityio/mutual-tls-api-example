@@ -33,13 +33,3 @@ if [ $? -ne 0 ]; then
   exit
 fi
 
-#
-# Build the customized NGINX Docker Container and its plugin
-#
-cd ../docker/reverse-proxy
-docker build -f ./Dockerfile -t custom_openresty:1.19.3.1-8-bionic .
-if [ $? -ne 0 ]; then
-  echo 'Problem encountered building the Custom NGINX docker container'
-  exit
-fi
-

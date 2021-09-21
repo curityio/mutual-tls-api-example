@@ -7,15 +7,16 @@ services:
   # - For API requests, Mutual TLS is terminated at the gateway
   #
   reverse-proxy:
-    image: custom_openresty:1.19.3.1-8-bionic
+    image: nginx:1.19.5-alpine
     hostname: reverseproxy-internal.example.com
     ports:
       - 443:3000
     volumes:
-      - ./reverse-proxy/nginx.conf:/usr/local/openresty/nginx/conf/nginx.conf
-      - ../certs/root.pem:/usr/local/openresty/certs/root.pem
-      - ../certs/example.tls.pem:/usr/local/openresty/certs/example.tls.pem
-      - ../certs/example.tls.key:/usr/local/openresty/certs/example.tls.key
+      - ./reverse-proxy/nginx.conf:/etc/nginx/nginx.conf
+      - ./reverse-proxy/alpine.ngx_curity_http_phantom_token_module_1.19.5.so:/usr/lib/nginx/modules/ngx_curity_http_phantom_token_module.so
+      - ../certs/root.pem:/etc/nginx/certs/root.pem
+      - ../certs/example.tls.pem:/etc/nginx/certs/example.tls.pem
+      - ../certs/example.tls.key:/etc/nginx/certs/example.tls.key
 
   #  
   # The Identity Server runs over HTTPS inside the cluster
