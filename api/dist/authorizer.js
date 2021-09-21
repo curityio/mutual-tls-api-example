@@ -22,6 +22,8 @@ class Authorizer {
             if (!accessToken) {
                 throw new Error('No access token was received in the incoming request');
             }
+            console.log(this.configuration.algorithm);
+            console.log(accessToken);
             const receivedPublicKey = this.getReceivedCertificatePublicKey(request);
             if (!receivedPublicKey) {
                 throw new Error('No client certificate public key was received in the incoming request');

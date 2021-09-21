@@ -3,7 +3,7 @@
     "tlsCertificateFile": "../certs/example.tls.p12",
     "tlsCertificatePassword": "Password1",
     "jwksUrl": "https://login-internal.example.com:8443/oauth/v2/oauth-anonymous/jwks",
-    "algorithm": "RS256",
+    "algorithm": "PS256",
     "issuer": "https://login.example.com/oauth/v2/oauth-anonymous",
     "audience": "api.example.com"
 }
