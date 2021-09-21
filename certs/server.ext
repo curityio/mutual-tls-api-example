@@ -1,1 +1,1 @@
-subjectAltName=DNS:example.com,DNS:login.example.com,DNS:api.example.com
+subjectAltName=DNS:example.com,DNS:login.example.com,DNS:api.example.com,DNS:login-internal.example.com,DNS:api-internal.example.com

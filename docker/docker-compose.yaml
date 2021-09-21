@@ -8,7 +8,7 @@ services:
   #
   reverse-proxy:
     image: custom_openresty:1.19.3.1-8-bionic
-    hostname: reverseproxy.example.internal
+    hostname: reverseproxy-internal.example.com
     ports:
       - 443:3000
     volumes:
@@ -23,7 +23,7 @@ services:
   #
   identity-server:
     image: curity.azurecr.io/curity/idsvr:6.4.2
-    hostname: login.example.com
+    hostname: login-internal.example.com
     ports:
       - 6749:6749
     volumes:
@@ -39,9 +39,10 @@ services:
   #
   api:
     image: mutual-tls-api:1.0.0
-    hostname: api.example.internal
+    hostname: api-internal.example.com
     volumes:
-      - ../certs/root.pem:/usr/local/share/certs/root.pem
       - ../api/config.json:/usr/local/api/config.json
+      - ../certs/root.pem:/usr/local/certs/root.pem
+      - ../certs/example.tls.p12:/usr/local/certs/example.tls.p12
     environment:
-      NODE_EXTRA_CA_CERTS: '/usr/local/share/certs/root.pem'
+      NODE_EXTRA_CA_CERTS: '/usr/local/certs/root.pem'

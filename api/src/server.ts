@@ -1,5 +1,6 @@
 import express from 'express';
 import fs from 'fs';
+import https from 'https';
 import {Authorizer} from './authorizer';
 import {Configuration} from './configuration';
 
@@ -23,9 +24,13 @@ app.post('/api/transactions', (request: express.Request, response: express.Respo
     console.log(`Example API returned a success result at ${new Date().toISOString()}`);
 });
 
-/*
- * For simplicity the example API uses an HTTP internal URL
- */
-app.listen(configuration.port, () => {
-    console.log(`Example API is listening on internal HTTP port ${configuration.port}`);
+const pfxFile = fs.readFileSync(configuration.tlsCertificateFile);
+const serverOptions = {
+    pfx: pfxFile,
+    passphrase: configuration.tlsCertificatePassword,
+};
+
+const httpsServer = https.createServer(serverOptions, app);
+httpsServer.listen(configuration.port, () => {
+    console.log(`Example API is listening on HTTPS port ${configuration.port}`);
 });

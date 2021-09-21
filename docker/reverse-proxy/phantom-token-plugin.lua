@@ -8,6 +8,28 @@ local jwt = require 'resty.jwt'
 local pl_stringx = require "pl.stringx"
 
 --
+-- Return errors due to invalid tokens or introspection technical problems
+--
+local function error_response(status, code, message, config)
+
+    local jsonData = '{"code":"' .. code .. '", "message":"' .. message .. '"}'
+    ngx.status = status
+    ngx.header['content-type'] = 'application/json'
+
+    if config.trusted_web_origins then
+
+        local origin = ngx.req.get_headers()["origin"]
+        if origin and array_has_value(config.trusted_web_origins, origin) then
+            ngx.header['Access-Control-Allow-Origin'] = origin
+            ngx.header['Access-Control-Allow-Credentials'] = 'true'
+        end
+    end
+    
+    ngx.say(jsonData)
+    ngx.exit(status)
+end
+
+--
 -- Return a generic message for all three of these error categories
 --
 local function invalid_token_error_response(config)

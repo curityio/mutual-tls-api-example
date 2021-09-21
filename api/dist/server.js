@@ -5,6 +5,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = __importDefault(require("express"));
 const fs_1 = __importDefault(require("fs"));
+const https_1 = __importDefault(require("https"));
 const authorizer_1 = require("./authorizer");
 const buffer = fs_1.default.readFileSync('config.json');
 const configuration = JSON.parse(buffer.toString());
@@ -21,9 +22,12 @@ app.post('/api/transactions', (request, response) => {
     response.status(200).send(JSON.stringify(data));
     console.log(`Example API returned a success result at ${new Date().toISOString()}`);
 });
-/*
- * For simplicity the example API uses an HTTP internal URL
- */
-app.listen(configuration.port, () => {
-    console.log(`Example API is listening on internal HTTP port ${configuration.port}`);
+const pfxFile = fs_1.default.readFileSync(configuration.tlsCertificateFile);
+const serverOptions = {
+    pfx: pfxFile,
+    passphrase: configuration.tlsCertificatePassword,
+};
+const httpsServer = https_1.default.createServer(serverOptions, app);
+httpsServer.listen(configuration.port, () => {
+    console.log(`Example API is listening on HTTPS port ${configuration.port}`);
 });

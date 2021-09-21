@@ -9,6 +9,7 @@ RESTCONF_BASE_URL='https://localhost:6749/admin/api/restconf/data'
 ADMIN_USER='admin'
 ADMIN_PASSWORD='Password1'
 RUNTIME_TLS_CERT_NAME='Curity_Example_TLS_Cert'
+ADMIN_TLS_CERT_NAME='default-admin-ssl-key'
 PRIVATE_KEY_PASSWORD='Password1'
 
 #
