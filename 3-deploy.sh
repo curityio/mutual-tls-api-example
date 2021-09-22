@@ -59,9 +59,9 @@ while [ "$(curl -k -s -o /dev/null -w ''%{http_code}'' -u "$ADMIN_USER:$ADMIN_PA
 done
 
 #
-# Update SSL keys and use the private key password to protect it in transit
+# Add the SSL key and use the private key password to protect it in transit
 #
-echo "Updating certificates ..."
+echo "Updating SSL certificate ..."
 HTTP_STATUS=$(curl -k -s \
 -X POST "$RESTCONF_BASE_URL/base:facilities/crypto/add-ssl-server-keystore" \
 -u "$ADMIN_USER:$ADMIN_PASSWORD" \
@@ -69,6 +69,20 @@ HTTP_STATUS=$(curl -k -s \
 -d "{\"id\":\"$RUNTIME_TLS_CERT_NAME\",\"password\":\"$PRIVATE_KEY_PASSWORD\",\"keystore\":\"$CURITY_EXAMPLE_TLS_KEY\"}" \
 -o /dev/null -w '%{http_code}')
 if [ "$HTTP_STATUS" != '200' ]; then
+  echo "Problem encountered updating the runtime SSL certificate: $HTTP_STATUS"
+  exit 1
+fi
+
+#
+# Set the SSL key as active for the runtime service role
+#
+HTTP_STATUS=$(curl -k -s \
+-X PATCH "$RESTCONF_BASE_URL/base:environments/base:environment/base:services/base:service-role=default" \
+-u "$ADMIN_USER:$ADMIN_PASSWORD" \
+-H 'Content-Type: application/yang-data+json' \
+-d "{\"base:service-role\": [{\"ssl-server-keystore\":\"$RUNTIME_TLS_CERT_NAME\"}]}" \
+-o /dev/null -w '%{http_code}')
+if [ "$HTTP_STATUS" != '204' ]; then
   echo "Problem encountered updating the runtime SSL certificate: $HTTP_STATUS"
   exit 1
 fi

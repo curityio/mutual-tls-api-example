@@ -22,8 +22,6 @@ class Authorizer {
             if (!accessToken) {
                 throw new Error('No access token was received in the incoming request');
             }
-            console.log(this.configuration.algorithm);
-            console.log(accessToken);
             const receivedPublicKey = this.getReceivedCertificatePublicKey(request);
             if (!receivedPublicKey) {
                 throw new Error('No client certificate public key was received in the incoming request');
@@ -36,6 +34,7 @@ class Authorizer {
             };
             const result = await (0, verify_1.jwtVerify)(accessToken, remoteKeySet, options);
             this.verifyClientPublicKey(receivedPublicKey, result.payload);
+            console.log(JSON.stringify(result.payload, null, 2));
             response.locals.claims = result.payload;
             next();
         }
