@@ -1,9 +1,10 @@
-.DS_Store
 docker/idsvr/license.json
 /certs/*
 !/certs/create-certs.sh
 !/certs/client.ext
 !/certs/server.ext
 node_modules
+dist
+.DS_Store
 .deploy
 .test
