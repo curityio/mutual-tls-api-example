@@ -10,7 +10,7 @@ local pl_stringx = require "pl.stringx"
 --
 -- Return errors due to invalid tokens or introspection technical problems
 --
-local function error_response(status, code, message, config)
+local function error_response(status, code, message)
 
     local jsonData = '{"code":"' .. code .. '", "message":"' .. message .. '"}'
     ngx.status = status
