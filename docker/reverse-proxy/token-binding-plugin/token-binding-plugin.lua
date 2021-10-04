@@ -89,7 +89,7 @@ function _M.execute(config)
         unauthorized_error_response()
     end
 
-    -- Calculate the SHA256 hash of the certificate / ssl_client_escaped_cert
+    -- Calculate the SHA256 hash of the client certificate and check it matches that in the JWT
     local certThumbprint = get_sha256_thumbprint(ngx.var.ssl_client_raw_cert)
     if certThumbprint ~= jwtThumbprint then
         ngx.log(ngx.WARN, 'The client certificate details of the request and the JWT do not match')
