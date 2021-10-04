@@ -3,12 +3,12 @@
 --
 
 local _M = {}
-local jwt = require 'resty.jwt'
-local pl_stringx = require "pl.stringx"
-local str = require 'resty.string'
-local sha256 = require 'resty.sha256'
 local b64 = require 'ngx.base64'
 local ssl = require 'ngx.ssl'
+local pl_stringx = require 'pl.stringx'
+local jwt = require 'resty.jwt'
+local sha256 = require 'resty.sha256'
+local str = require 'resty.string'
 
 --
 -- Return errors due to invalid requests or server technical problems

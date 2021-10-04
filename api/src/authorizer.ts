@@ -123,10 +123,7 @@ export class Authorizer {
         const cert = pki.certificateFromPem(publicKey);
         const derBytes = asn1.toDer(pki.certificateToAsn1(cert)).getBytes();
         const hexThumbprint = md.sha256.create().update(derBytes).digest().toHex();
-        console.log(`*** API DER BYTES HEX THUMBPRINT: ${hexThumbprint}`);
-        const result = base64url.encode(Buffer.from(hexThumbprint, 'hex'));
-        console.log(`*** API BASE URL ENCODED: ${result}`);
-        return result;
+        return base64url.encode(Buffer.from(hexThumbprint, 'hex'));
     }
 
     /*
