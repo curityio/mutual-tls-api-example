@@ -3,8 +3,9 @@
 --
 
 local _M = {}
-local pl_stringx = require "pl.stringx"
 local jwt = require 'resty.jwt'
+local pl_stringx = require "pl.stringx"
+local resty_string = require 'resty.string'
 
 --
 -- Return errors due to invalid requests or server technical problems
@@ -76,6 +77,7 @@ function _M.execute(config)
     -- -----BEGIN%20CERTIFICATE-----%0AMIIDJjC
     
     ngx.log(ngx.WARN, "CERTIFICATE: " .. ngx.var.ssl_client_escaped_cert)
+    ngx.log(ngx.WARN, "CERTIFICATE HASH: " .. resty_string.sha256(ngx.var.ssl_client_escaped_cert))
     ngx.log(ngx.WARN, "THUMBPRINT: "  .. thumbprint)
 end
 
