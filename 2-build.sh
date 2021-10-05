@@ -33,10 +33,29 @@ if [ $? -ne 0 ]; then
   exit
 fi
 
+cd ../docker/reverse-proxy
+rm -rf .deploy
+mkdir .deploy
+cd .deploy
+
+#
+# Download reverse proxy plugins
+#
+git clone https://github.com/curityio/openresty-phantom-token-plugin
+if [ $? -ne 0 ]; then
+  echo "Problem encountered downloading the phantom token plugin"
+  exit 1
+fi
+git clone https://github.com/curityio/token-binding-plugin
+if [ $? -ne 0 ]; then
+  echo "Problem encountered downloading the token binding plugin"
+  exit 1
+fi
+cd ..
+
 #
 # Build the customized NGINX Docker Container and its plugin
 #
-cd ../docker/reverse-proxy
 docker build -f ./Dockerfile -t custom_openresty:1.19.3.1-8-bionic .
 if [ $? -ne 0 ]; then
   echo 'Problem encountered building the Custom NGINX docker container'

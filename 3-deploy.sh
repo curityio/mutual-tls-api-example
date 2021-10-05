@@ -49,6 +49,7 @@ if [ $? -ne 0 ]; then
   echo "Problem encountered running Docker components"
   exit 1
 fi
+cd ..
 
 #
 # Wait for the admin endpoint to become available

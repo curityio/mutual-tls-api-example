@@ -1,6 +1,6 @@
 # Mutual TLS Secured API Code Example
 
-A Mutual TLS code example to demonstrate infrastructure setup and use of sender constrained access tokens.
+A code example to demonstrate Mutual TLS infrastructure and use of sender constrained access tokens.
 
 ## B2B APIs
 
@@ -77,9 +77,9 @@ curl -s -X POST "https://api.example.com/api/transactions" \
 A dedicated endpoint is used for Mutual TLS connections, which avoids impacting other clients.\
 Access tokens are issued with a `cnf` claim containing the SHA256 thumbprint of the client's certificate.
 
-### API
+### Token Binding
 
-The API verifies that the thumbprint in the JWT's `cnf` claim matches that of the caller's client certificate:
+The reverse proxy verifies that the JWT's `cnf` claim matches the thumbprint of the request's client certificate:
 
 ```json
 "cnf": {
