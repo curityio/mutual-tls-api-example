@@ -1,7 +1,7 @@
 {
     "name": "example-api",
     "version": "1.0.0",
-    "description": "A simple API whose reverse proxy enforces Mutual TLS and sender constrained access tokens",
+    "description": "A simple API whose reverse proxy enforces Mutual TLS and certificate bound access tokens",
     "main": "server.ts",
     "scripts": {
         "build": "rimraf dist && tsc",

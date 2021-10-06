@@ -1,6 +1,6 @@
 import {NextFunction, Request, Response} from 'express';
 import {createRemoteJWKSet} from 'jose/jwks/remote';
-import {jwtVerify, JWTPayload} from 'jose/jwt/verify';
+import {jwtVerify} from 'jose/jwt/verify';
 import {Configuration} from './configuration';
 
 export class Authorizer {
