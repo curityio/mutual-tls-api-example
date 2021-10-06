@@ -13,7 +13,7 @@ Mutual TLS is commonly used for APIs between business partners, including in Ope
 
 ## Walkthrough
 
-The [Mutual TLS API Code Example Article](https://curity.io/resources/learn/mutual-tls-api/) explains the technical behavior of the code example.
+The [Mutual TLS API Code Example Article](https://curity.io/resources/learn/mutual-tls-api/) explains the technical behavior and setup.
 
 ## Quick Start
 
