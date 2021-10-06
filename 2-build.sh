@@ -1,8 +1,8 @@
 #!/bin/bash
 
-############################################################################
-# A script to build the API code into a Docker container ready for deploying
-############################################################################
+########################################################################
+# A script to build resources into Docker containers ready for deploying
+########################################################################
 
 #
 # Get API dependencies
@@ -54,7 +54,7 @@ fi
 cd ..
 
 #
-# Build the customized NGINX Docker Container and its plugin
+# Build the customized NGINX Docker Container with plugins
 #
 docker build -f ./Dockerfile -t custom_openresty:1.19.3.1-8-bionic .
 if [ $? -ne 0 ]; then

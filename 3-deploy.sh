@@ -26,7 +26,7 @@ if [ ! -f './docker/idsvr/license.json' ]; then
 fi
 
 #
-# Check that certificates have been generated
+# Check that certificates have been generated before deploying
 #
 if [ ! -f './certs/root.pem' ]; then
   echo "Please generate some certificates before deploying the system"
