@@ -41,7 +41,7 @@ cd .deploy
 #
 # Download reverse proxy plugins
 #
-git clone https://github.com/curityio/openresty-phantom-token-plugin
+git clone https://github.com/curityio/lua-nginx-phantom-token-plugin
 if [ $? -ne 0 ]; then
   echo "Problem encountered downloading the phantom token plugin"
   exit 1
