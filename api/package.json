@@ -1,0 +1,23 @@
+{
+    "name": "example-api",
+    "version": "1.0.0",
+    "description": "A simple API whose reverse proxy enforces Mutual TLS and certificate bound access tokens",
+    "main": "server.ts",
+    "scripts": {
+        "build": "rimraf dist && tsc",
+        "startApi": "node dist/server.js",
+        "start": "npm run build && npm run startApi"
+    },
+    "author": "Curity AB",
+    "license": "Apache-2.0",
+    "dependencies": {
+        "express": "^4.17.1",
+        "jose": "^3.15.4"
+    },
+    "devDependencies": {
+        "@types/express": "^4.17.9",
+        "@types/node": "^14.14.10",
+        "rimraf": "^3.0.2",
+        "typescript": "^4.3.5"
+    }
+}
