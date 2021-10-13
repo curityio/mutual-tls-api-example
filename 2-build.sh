@@ -46,9 +46,9 @@ if [ $? -ne 0 ]; then
   echo "Problem encountered downloading the phantom token plugin"
   exit 1
 fi
-git clone https://github.com/curityio/token-binding-plugin
+git clone https://github.com/curityio/sender-constrained-token-plugin
 if [ $? -ne 0 ]; then
-  echo "Problem encountered downloading the token binding plugin"
+  echo "Problem encountered downloading the sender constrained token plugin"
   exit 1
 fi
 cd ..
