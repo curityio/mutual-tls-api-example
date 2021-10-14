@@ -8,6 +8,7 @@ IDENTITY_SERVER_BASE_URL=https://login.example.com/oauth/v2
 API_BASE_URL=https://api.example.com/api
 CLIENT_ID=partner-client
 CLIENT_SECRET=Password1
+CLIENT_CERT_PASSWORD=Password1
 RESPONSE_FILE=./.test/response.txt
 
 mkdir -p .test
@@ -17,8 +18,8 @@ mkdir -p .test
 #
 echo "Client is authenticating with the Identity Server via Mutual TLS ..."
 HTTP_STATUS=$(curl -s -X POST "$IDENTITY_SERVER_BASE_URL/oauth-token-mutual-tls" \
---cert ./certs/example.client.pem \
---key ./certs/example.client.key \
+--cert ./certs/example.client.p12:"$CLIENT_CERT_PASSWORD" \
+--cert-type P12 \
 --cacert ./certs/root.pem \
 -H "Content-Type: application/x-www-form-urlencoded" \
 -d "client_id=$CLIENT_ID" \
@@ -29,7 +30,7 @@ if [ "$HTTP_STATUS" != '200' ]; then
   echo "*** Client experienced a problem authenticating via Client Credentials with Mutual TLS: $HTTP_STATUS"
   exit
 fi
-JSON=$(tail -n 1 $RESPONSE_FILE) 
+JSON=$(tail -n 1 $RESPONSE_FILE)
 OPAQUE_ACCESS_TOKEN=$(jq -r .access_token <<< "$JSON")
 echo "Client successfully authenticated and received an opaque access token"
 
@@ -39,8 +40,8 @@ echo "Client successfully authenticated and received an opaque access token"
 #
 echo "Client is creating a transaction at the API using Mutual TLS and the opaque access token ..."
 HTTP_STATUS=$(curl -s -X POST "$API_BASE_URL/transactions" \
---cert ./certs/example.client.pem \
---key ./certs/example.client.key \
+--cert ./certs/example.client.p12:"$CLIENT_CERT_PASSWORD" \
+--cert-type P12 \
 --cacert ./certs/root.pem \
 -H "Authorization: Bearer $OPAQUE_ACCESS_TOKEN" \
 -H "Content-Type: application/json" \
@@ -49,5 +50,5 @@ if [ "$HTTP_STATUS" != '200' ]; then
   echo "*** Client experienced a problem calling the example API: $HTTP_STATUS"
   exit
 fi
-JSON=$(tail -n 1 $RESPONSE_FILE) 
+JSON=$(tail -n 1 $RESPONSE_FILE)
 echo "Client successfully created the API transaction using Mutual TLS"
