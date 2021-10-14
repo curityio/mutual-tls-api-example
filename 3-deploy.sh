@@ -44,7 +44,7 @@ export CURITY_EXAMPLE_TLS_KEY=$(openssl base64 -in ./certs/example.tls.p12 | tr 
 #
 echo "Deploying Docker system ..."
 cd docker
-docker compose up --detach --force-recreate --remove-orphans
+docker compose --project-name mutual-tls-api-example up --detach --force-recreate --remove-orphans
 if [ $? -ne 0 ]; then
   echo "Problem encountered running Docker components"
   exit 1
@@ -55,7 +55,7 @@ cd ..
 # Wait for the admin endpoint to become available
 #
 echo "Waiting for the Curity Identity Server ..."
-while [ "$(curl -k -s -o /dev/null -w ''%{http_code}'' -u "$ADMIN_USER:$ADMIN_PASSWORD" "$RESTCONF_BASE_URL?content=config")" != "200" ]; do 
+while [ "$(curl -k -s -o /dev/null -w ''%{http_code}'' -u "$ADMIN_USER:$ADMIN_PASSWORD" "$RESTCONF_BASE_URL?content=config")" != "200" ]; do
   sleep 2s
 done
 
