@@ -41,6 +41,12 @@ Then authenticate via Mutual TLS and call the API over a Mutual TLS channel:
 ./4-run-client.sh
 ```
 
+For troubleshooting view the logs:
+
+```bash
+./5-view-logs.sh
+```
+
 ## Security Workflow
 
 The code example enables the security workflow to be easily run on a development computer:
