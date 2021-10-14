@@ -87,6 +87,9 @@ openssl pkcs12 \
     -passout pass:$CLIENT_CERT_PASSWORD
 echo '*** Successfully exported client certificate to a PKCS#12 file'
 
+# Remove temporary files used to create the client certificate
+rm $CLIENT_CERT_FILE_PREFIX.csr $CLIENT_CERT_FILE_PREFIX.key $CLIENT_CERT_FILE_PREFIX.pem
+
 #
 # Create the SSL certificate that back end components will use
 #
@@ -118,3 +121,9 @@ openssl pkcs12 \
     -out $TLS_CERT_FILE_PREFIX.p12 \
     -passout pass:$TLS_CERT_PASSWORD
 echo '*** Successfully exported TLS certificate to a PKCS#12 file'
+
+# Remove temporary files of the server certificate
+rm $TLS_CERT_FILE_PREFIX.csr
+
+# Root CA is not needed anymore.
+rm $ROOT_CERT_FILE_PREFIX.key $ROOT_CERT_FILE_PREFIX.srl
