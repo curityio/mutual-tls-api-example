@@ -1,0 +1,13 @@
+[ client_ext ]
+
+# Extended properties for client certificate generation
+authorityKeyIdentifier=keyid,issuer
+basicConstraints=CA:FALSE
+keyUsage = digitalSignature, nonRepudiation, keyEncipherment, dataEncipherment
+extendedKeyUsage = clientAuth
+
+[ server_ext ]
+basicConstraints = CA:FALSE
+keyUsage = nonRepudiation, digitalSignature, keyEncipherment
+subjectAltName=DNS:example.com,DNS:login.example.com,DNS:api.example.com,DNS:login-internal.example.com,DNS:api-internal.example.com
+extendedKeyUsage = serverAuth

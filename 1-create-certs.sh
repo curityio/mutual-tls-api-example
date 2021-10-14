@@ -76,7 +76,8 @@ openssl x509 -req \
     -out $CLIENT_CERT_FILE_PREFIX.pem \
     -sha256 \
     -days 365 \
-    -extfile client.ext
+    -extensions client_ext \
+    -extfile extensions.cnf
 echo '*** Successfully created client certificate'
 
 openssl pkcs12 \
@@ -111,7 +112,8 @@ openssl x509 -req \
     -out $TLS_CERT_FILE_PREFIX.pem \
     -sha256 \
     -days 365 \
-    -extfile server.ext
+    -extensions server_ext \
+    -extfile extensions.cnf
 echo '*** Successfully created TLS certificate'
 
 openssl pkcs12 \
