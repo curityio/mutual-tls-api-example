@@ -4,7 +4,12 @@
 # A script to create development certificates for Mutual TLS testing
 ####################################################################
 
-cd certs
+#
+# Get full path of the parent folder of this script
+#
+D=$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)
+
+cd "$D/certs"
 set -e
 
 #
