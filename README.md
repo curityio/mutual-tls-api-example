@@ -41,10 +41,12 @@ Then authenticate via Mutual TLS and call the API over a Mutual TLS channel:
 ./4-run-client.sh
 ```
 
-For troubleshooting view the logs:
+For troubleshooting view the logs. Run any of the following command:
 
 ```bash
-./5-view-logs.sh
+./5-view-logs.sh api
+./5-view-logs.sh identity-server
+./5-view-logs.sh reverse-proxy
 ```
 
 ## Security Workflow
