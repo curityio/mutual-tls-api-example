@@ -59,7 +59,7 @@ curl -s -X POST "https://login.example.com/oauth/v2/oauth-token-mutual-tls" \
 -d "grant_type=client_credentials" \
 -d "scope=transactions"
 ```
-The client then receives an opaque access token and sends it to the API, using Mutual TLS and the token: 
+The client then receives an opaque access token and sends it to the API, using Mutual TLS and the token:
 
 ```bash
 curl -s -X POST "https://api.example.com/api/transactions" \
@@ -72,7 +72,7 @@ curl -s -X POST "https://api.example.com/api/transactions" \
 
 ### Reverse Proxy and Mutual TLS Termination
 
-- For OAuth requests the Mutual TLS verification is done at the Curity Identity Server
+- For OAuth requests the Mutual TLS verification is done by the Curity Identity Server
 - For API requests the Mutual TLS verification is done by the reverse proxy
 
 ### Curity Identity Server
@@ -82,7 +82,7 @@ Access tokens are issued with a `cnf` claim containing the SHA256 thumbprint of 
 
 ### Token Binding Verification
 
-The reverse proxy verifies that the JWT's `cnf` claim matches the thumbprint of the request's client certificate:
+For an API request the reverse proxy introspects the opaque token from the client and asks the Curity Identity Server to return the token in JWT format. Then it verifies that the JWT's `cnf` claim matches the thumbprint of the request's client certificate:
 
 ```json
 "cnf": {
