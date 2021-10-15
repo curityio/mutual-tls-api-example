@@ -1,0 +1,8 @@
+[submodule "docker/reverse-proxy/dependencies/lua-nginx-phantom-token-plugin"]
+	path = docker/reverse-proxy/dependencies/lua-nginx-phantom-token-plugin
+	url = ../lua-nginx-phantom-token-plugin
+	branch = main
+[submodule "docker/reverse-proxy/dependencies/sender-constrained-token-plugin"]
+	path = docker/reverse-proxy/dependencies/sender-constrained-token-plugin
+	url = ../sender-constrained-token-plugin
+	branch = main
