@@ -5,9 +5,15 @@
 ########################################################################
 
 #
+# Get full path of the parent folder of this script
+#
+D=$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)
+
+
+#
 # Get API dependencies
 #
-cd api
+cd "$D/api"
 rm -rf node_modules
 npm install
 if [ $? -ne 0 ]; then

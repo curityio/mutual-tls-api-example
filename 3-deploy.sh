@@ -13,14 +13,20 @@ ADMIN_TLS_CERT_NAME='default-admin-ssl-key'
 PRIVATE_KEY_PASSWORD='Password1'
 
 #
+# Get full path of the parent folder of this script
+#
+D=$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)
+
+
+#
 # This just prevents accidental checkins of license files by Curity developers
 #
-cp hooks/pre-commit .git/hooks
+cp "$D/hooks/pre-commit" "$D/.git/hooks"
 
 #
 # Check that a license file for the Curity Identity Server has been provided
 #
-if [ ! -f './docker/idsvr/license.json' ]; then
+if [ ! -f "$D/docker/idsvr/license.json" ]; then
   echo "Please provide a license.json file in the docker/idsvr folder in order to deploy the system"
   exit 1
 fi
@@ -28,7 +34,7 @@ fi
 #
 # Check that certificates have been generated before deploying
 #
-if [ ! -f './certs/root.pem' ]; then
+if [ ! -f "$D/certs/root.pem" ]; then
   echo "Please generate some certificates before deploying the system"
   exit 1
 fi
@@ -36,15 +42,15 @@ fi
 #
 # Create environment variables for certificates
 #
-export CURITY_EXAMPLE_ROOT_CA=$(openssl base64 -in ./certs/root.pem | tr -d '\n')
-export CURITY_EXAMPLE_TLS_KEY=$(openssl base64 -in ./certs/example.tls.p12 | tr -d '\n')
+export CURITY_EXAMPLE_ROOT_CA=$(openssl base64 -in "$D/certs/root.pem" | tr -d '\n')
+export CURITY_EXAMPLE_TLS_KEY=$(openssl base64 -in "$D/certs/example.tls.p12" | tr -d '\n')
 
 #
 # Spin up all Docker components
 #
 echo "Deploying Docker system ..."
-cd docker
-docker compose up --detach --force-recreate --remove-orphans
+cd "$D/docker"
+docker compose --project-name mutual-tls-api-example up --detach --force-recreate --remove-orphans
 if [ $? -ne 0 ]; then
   echo "Problem encountered running Docker components"
   exit 1
@@ -55,7 +61,7 @@ cd ..
 # Wait for the admin endpoint to become available
 #
 echo "Waiting for the Curity Identity Server ..."
-while [ "$(curl -k -s -o /dev/null -w ''%{http_code}'' -u "$ADMIN_USER:$ADMIN_PASSWORD" "$RESTCONF_BASE_URL?content=config")" != "200" ]; do 
+while [ "$(curl -k -s -o /dev/null -w ''%{http_code}'' -u "$ADMIN_USER:$ADMIN_PASSWORD" "$RESTCONF_BASE_URL?content=config")" != "200" ]; do
   sleep 2s
 done
 

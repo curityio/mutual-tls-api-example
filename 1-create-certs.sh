@@ -4,7 +4,12 @@
 # A script to create development certificates for Mutual TLS testing
 ####################################################################
 
-cd certs
+#
+# Get full path of the parent folder of this script
+#
+D=$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)
+
+cd "$D/certs"
 set -e
 
 #
@@ -76,7 +81,8 @@ openssl x509 -req \
     -out $CLIENT_CERT_FILE_PREFIX.pem \
     -sha256 \
     -days 365 \
-    -extfile client.ext
+    -extensions client_ext \
+    -extfile extensions.cnf
 echo '*** Successfully created client certificate'
 
 openssl pkcs12 \
@@ -86,6 +92,9 @@ openssl pkcs12 \
     -out $CLIENT_CERT_FILE_PREFIX.p12 \
     -passout pass:$CLIENT_CERT_PASSWORD
 echo '*** Successfully exported client certificate to a PKCS#12 file'
+
+# Remove temporary files used to create the client certificate
+rm $CLIENT_CERT_FILE_PREFIX.csr $CLIENT_CERT_FILE_PREFIX.key $CLIENT_CERT_FILE_PREFIX.pem
 
 #
 # Create the SSL certificate that back end components will use
@@ -108,7 +117,8 @@ openssl x509 -req \
     -out $TLS_CERT_FILE_PREFIX.pem \
     -sha256 \
     -days 365 \
-    -extfile server.ext
+    -extensions server_ext \
+    -extfile extensions.cnf
 echo '*** Successfully created TLS certificate'
 
 openssl pkcs12 \
@@ -118,3 +128,9 @@ openssl pkcs12 \
     -out $TLS_CERT_FILE_PREFIX.p12 \
     -passout pass:$TLS_CERT_PASSWORD
 echo '*** Successfully exported TLS certificate to a PKCS#12 file'
+
+# Remove temporary files of the server certificate
+rm $TLS_CERT_FILE_PREFIX.csr
+
+# Root CA is not needed anymore.
+rm $ROOT_CERT_FILE_PREFIX.key $ROOT_CERT_FILE_PREFIX.srl

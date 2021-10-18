@@ -2,8 +2,7 @@ docker/idsvr/license.json
 docker/reverse-proxy/.deploy
 /certs/*
 !/certs/create-certs.sh
-!/certs/client.ext
-!/certs/server.ext
+!/certs/extensions.cnf
 node_modules
 dist
 .DS_Store
