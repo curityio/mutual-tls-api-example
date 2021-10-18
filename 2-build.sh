@@ -40,24 +40,11 @@ if [ $? -ne 0 ]; then
 fi
 
 cd ../docker/reverse-proxy
-rm -rf .deploy
-mkdir .deploy
-cd .deploy
 
 #
 # Download reverse proxy plugins
 #
-git clone https://github.com/curityio/lua-nginx-phantom-token-plugin
-if [ $? -ne 0 ]; then
-  echo "Problem encountered downloading the phantom token plugin"
-  exit 1
-fi
-git clone https://github.com/curityio/sender-constrained-token-plugin
-if [ $? -ne 0 ]; then
-  echo "Problem encountered downloading the sender constrained token plugin"
-  exit 1
-fi
-cd ..
+git submodule update --init --remote --rebase
 
 #
 # Build the customized NGINX Docker Container with plugins
