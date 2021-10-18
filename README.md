@@ -53,30 +53,10 @@ For troubleshooting view the logs by running one or more of the following comman
 
 The code example enables the security workflow to be easily run on a development computer:
 
-### Client Requests
+### Client Behavior
 
-The client authenticates using the OAuth Client Credentials Grant with a Client Certiticate credential:
-
-```bash
-curl -s -X POST "https://login.example.com/oauth/v2/oauth-token-mutual-tls" \
---cert ./certs/example.client.pem \
---key ./certs/example.client.key \
---cacert ./certs/root.pem \
--H "Content-Type: application/x-www-form-urlencoded" \
--d "client_id=partner-client" \
--d "grant_type=client_credentials" \
--d "scope=transactions"
-```
-The client then receives an opaque access token and sends it to the API, using Mutual TLS and the token:
-
-```bash
-curl -s -X POST "https://api.example.com/api/transactions" \
---cert ./certs/example.client.pem \
---key ./certs/example.client.key \
---cacert ./certs/root.pem \
--H "Authorization: Bearer 42fb44ec-4d96-4f5a-ac48-abbd7e004a2a" \
--H "Content-Type: application/json"
-```
+- The client authenticates using the OAuth Client Credentials Grant with a Client Certiticate credential
+- The client then receives an opaque access token and sends it to the API, using Mutual TLS and the token
 
 ### Reverse Proxy and Mutual TLS Termination
 
@@ -85,18 +65,13 @@ curl -s -X POST "https://api.example.com/api/transactions" \
 
 ### Curity Identity Server
 
-A dedicated endpoint is used for Mutual TLS connections, which avoids impacting other clients.\
-Access tokens are issued with a `cnf` claim containing the SHA256 thumbprint of the client's certificate.
+- A dedicated endpoint is used for Mutual TLS connections, which avoids impacting other clients
+- Access tokens are issued with a `cnf` claim containing the SHA256 thumbprint of the client's certificate
 
 ### Certificate Bound Token Verification
 
-For an API request the reverse proxy introspects the opaque token from the client and asks the Curity Identity Server to return the token in JWT format. Then it verifies that the JWT's `cnf` claim matches the thumbprint of the request's client certificate:
-
-```json
-"cnf": {
-"x5t#S256": "aEHDMMqTn73h-ybp-30KNG6aYeWCGjVgKO7WIBgB85Y"
-}
-```
+- During API requests the reverse proxy introspects the opaque token from the client to get the token in JWT format
+- The reverse proxy then verifies that the JWT's `cnf` claim matches the thumbprint of the request's client certificate
 
 ## More Information
 
