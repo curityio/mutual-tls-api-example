@@ -21,6 +21,6 @@ case "$SHORT_NAME" in
 ;;
 esac
 
-export OPENRESTY_CONTAINER_ID=$(docker container ls --filter "label=com.docker.compose.service=$1" --filter "label=com.docker.compose.project=mutual-tls-api-example" --quiet)
-echo "Showing logs for container $OPENRESTY_CONTAINER_ID"
-docker logs -f $OPENRESTY_CONTAINER_ID
+export CONTAINER_ID=$(docker container ls --filter "label=com.docker.compose.service=$1" --filter "label=com.docker.compose.project=mutual-tls-api-example" --quiet)
+echo "Showing logs for container $CONTAINER_ID"
+docker logs -f $CONTAINER_ID

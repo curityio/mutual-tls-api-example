@@ -129,8 +129,5 @@ openssl pkcs12 \
     -passout pass:$TLS_CERT_PASSWORD
 echo '*** Successfully exported TLS certificate to a PKCS#12 file'
 
-# Remove temporary files of the server certificate
-rm $TLS_CERT_FILE_PREFIX.csr
-
-# Root CA is not needed anymore.
-rm $ROOT_CERT_FILE_PREFIX.key $ROOT_CERT_FILE_PREFIX.srl
+# Remove temporary files that are no longer needed
+rm $TLS_CERT_FILE_PREFIX.csr $ROOT_CERT_FILE_PREFIX.key $ROOT_CERT_FILE_PREFIX.srl
