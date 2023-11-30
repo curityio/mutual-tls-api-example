@@ -1,4 +1,4 @@
-FROM openresty/openresty:1.19.3.1-8-bionic
+FROM openresty/openresty:1.21.4.3-2-bionic
 
 RUN luarocks install lua-resty-http
 RUN luarocks install lua-resty-string
