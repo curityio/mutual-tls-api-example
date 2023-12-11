@@ -1,6 +1,7 @@
 import {NextFunction, Request, Response} from 'express';
 import * as jose from 'jose';
 import {Configuration} from './configuration';
+import * as url from "url";
 
 export class Authorizer {
 
@@ -23,7 +24,7 @@ export class Authorizer {
                 throw new Error('No access token was received in the incoming request')
             }
 
-            const remoteKeySet = jose.createRemoteJWKSet(new URL(this.configuration.jwksUrl))
+            const remoteKeySet = jose.createRemoteJWKSet(<URL>new URL(this.configuration.jwksUrl))
 
             const options = {
                 algorithms: [this.configuration.algorithm],
@@ -69,6 +70,7 @@ export class Authorizer {
      * Basic API error logging
      */
     private logError(e: any, statusCode: number) {
+
         const details = e.message ? e.message : 'No further information provided';
         console.log(`API Problem Encountered, status: ${statusCode}, details: ${details}`);
     }
