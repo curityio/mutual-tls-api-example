@@ -7,7 +7,7 @@ services:
   # - For API requests, Mutual TLS is terminated at the gateway
   #
   reverse-proxy:
-    image: custom_openresty:1.19.3.1-8-bionic
+    image: custom_openresty:1.21.4.3-2-bionic
     hostname: reverseproxy-internal.example.com
     ports:
       - 443:3000
@@ -22,7 +22,7 @@ services:
   # It is accessed externally at https://login.example.com over port 443
   #
   identity-server:
-    image: curity.azurecr.io/curity/idsvr:6.4.2
+    image: curity.azurecr.io/curity/idsvr:8.6.1
     hostname: login-internal.example.com
     ports:
       - 6749:6749

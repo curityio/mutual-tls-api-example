@@ -73,6 +73,16 @@ The code example enables the security workflow to be easily run on a development
 - During API requests the reverse proxy introspects the opaque token from the client to get the token in JWT format
 - The reverse proxy then verifies that the JWT's `cnf` claim matches the thumbprint of the request's client certificate
 
+## Teardown
+
+Once you're done testing out the solution run
+
+```bash
+./6-teardown.sh
+```
+
+to remove all the project's containers.
+
 ## More Information
 
 Please visit [curity.io](https://curity.io/) for more information about the Curity Identity Server.

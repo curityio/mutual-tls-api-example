@@ -1,4 +1,4 @@
-FROM node:16.6.0-alpine
+FROM node:18-alpine
 
 RUN apk --no-cache add curl
 #RUN apk --no-cache add openssl

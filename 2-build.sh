@@ -49,7 +49,7 @@ git submodule update --init --remote --rebase
 #
 # Build the customized NGINX Docker Container with plugins
 #
-docker build -f ./Dockerfile -t custom_openresty:1.19.3.1-8-bionic .
+docker build -f ./Dockerfile -t custom_openresty:1.21.4.3-2-bionic .
 if [ $? -ne 0 ]; then
   echo 'Problem encountered building the Custom NGINX docker container'
   exit

@@ -1,7 +1,7 @@
 import {NextFunction, Request, Response} from 'express';
-import {createRemoteJWKSet} from 'jose/jwks/remote';
-import {jwtVerify} from 'jose/jwt/verify';
+import * as jose from 'jose';
 import {Configuration} from './configuration';
+import * as url from "url";
 
 export class Authorizer {
 
@@ -24,7 +24,7 @@ export class Authorizer {
                 throw new Error('No access token was received in the incoming request')
             }
 
-            const remoteKeySet = createRemoteJWKSet(new URL(this.configuration.jwksUrl))
+            const remoteKeySet = jose.createRemoteJWKSet(<URL>new URL(this.configuration.jwksUrl))
 
             const options = {
                 algorithms: [this.configuration.algorithm],
@@ -32,7 +32,7 @@ export class Authorizer {
                 audience: this.configuration.audience,
             };
             
-            const result = await jwtVerify(accessToken, remoteKeySet, options);
+            const result = await jose.jwtVerify(accessToken, remoteKeySet, options);
 
             response.locals.claims = result.payload;
             next();
